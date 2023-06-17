@@ -10,13 +10,13 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    /*LoginWindow* l = new LoginWindow(QSize(500,500),nullptr);
+    /*login_view* l = new login_view(QSize(500,500),nullptr);
     l->show();
 
-    RegistrationWindow* r= new RegistrationWindow(QSize(500,500),nullptr);
+    registrazione_view* r= new registrazione_view(QSize(500,500),nullptr);
     r->show();
     */
-    MenuWindow* m = new MenuWindow(QSize(500,500),nullptr);
+    menu_view* m = new menu_view(QSize(500,500),nullptr);
     m->show();
 
     return QApplication::exec();

@@ -1,12 +1,12 @@
 #include "registrazione_controller.h"
 
-RegController::RegController(registrazione_view * r, Controller* c) : Controller(r, c){
+RegController::RegController(storage* s, registrazione_view * r, Controller* c) : Controller(s, r, c){
     connect(view,SIGNAL(Reg_signal(em, pass)),this,SLOT(Registr_enter(_nome, _cognome)));
 }
 storage* RegController::getModel()const {
     return static_cast<storage*>(mod);
 }
-login_view* RegController::getView() const{
+registrazione_view* RegController::getView() const{
     return static_cast<registrazione_view*>(view) ;
 }
 

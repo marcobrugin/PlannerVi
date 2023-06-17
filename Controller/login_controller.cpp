@@ -2,6 +2,7 @@
 
 LoginController::LoginController(storage* s, login_view * l, Controller* c) : Controller(s, l, c){
     connect(view,SIGNAL(Login_signal(em, pass)),this,SLOT(Login_enter(em, pass)));
+    connect(view,SIGNAL(Label_signal()),this,SLOT(Label_enter()));
 }
  storage* LoginController::getModel()const {
     return static_cast<storage*>(mod);

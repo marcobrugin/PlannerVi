@@ -11,9 +11,9 @@ class RegController : public Controller {
 protected:
     RegController();
 public:
-    RegController(registrazione_view*, Controller* = nullptr);
+    RegController(storage*, registrazione_view*, Controller* = nullptr);
     storage* getModel() const override;
-    login_view* getView() const override;
+    registrazione_view* getView() const override;
 public slots:
     void Registr_enter(QString _nome, QString _cogn) const;
     void onViewClosed() const override;
