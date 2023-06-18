@@ -34,6 +34,9 @@ public:
 
 public slots:
     void onRegisterButtonClicked();
+signals:
+    void RegClicked() const;
+    void Utente_add_signal(const string&, const string&, const string&, const string&, const string&, const string&, const string& ) const;
 };
 
 #endif // REGISTRAZIONE_VIEW_H

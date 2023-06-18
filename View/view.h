@@ -6,6 +6,8 @@
 #include <QString>
 #include <QMessageBox>
 #include <QCloseEvent>
+#include <iostream>
+using std::string;
 
 class View:public QWidget //classe base polimorfa, è la base delle altre schermate
 {
