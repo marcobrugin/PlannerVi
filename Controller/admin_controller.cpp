@@ -11,7 +11,7 @@ storage* AdminController::getModel()const {
 }
 
 admin_view* AdminController::getView() const{
-    admin_view static_cast<admin_view*>(view) ;
+    return static_cast<admin_view*>(view) ;
 }
 void AdminController::onViewClosed() const {
     delete this;
