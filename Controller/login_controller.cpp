@@ -22,11 +22,18 @@ void LoginController::Login_enter(const string& em, const string& pass) const {
             find=0;
             if(it->getPassword()==pass){ //controllo correttezza password
                 //MANCA IL CONTROLLO SUL UTENTE VS ADMIN PER LA VISUALIZZAZIONE DELLA RELATIVA SCHEDA
-                menu_view* menuW = new menu_view(QSize(300,400), view);
+                if(it->getEmail()=="admin"){
+                    admin_view* aW = new admin_view(QSize(300,400), view);
+                    aW->show();
+                    AdminController* aC = new AdminController(getModel() , aW , const_cast<LoginController*>(this));
+                }
+                else{
+                menu_view* menuW = new menu_view(QSize(300,400), view); //posso passargli pure la mail dell'utente?
                 menuW->show();
                 MenuController* menuC = new MenuController(getModel() , menuW , const_cast<LoginController*>(this));
                 menuC->show();
                 hide();
+                }
             }
             else{
                 view->showError("Errore","Password errata");
