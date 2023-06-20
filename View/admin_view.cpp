@@ -42,9 +42,7 @@ admin_view::admin_view(const QSize& s, View* parent) : View(s, parent)
 
 }
 
-void admin_view::visualizza_aule(contenitore<prenotazione*>& ) const{
-    foreach()
-}
+
 
 //MI SERVE SOLO COME SPUNTO!!!
 /*void ResultsWidget::showResults(Engine::Query query, Engine::ResultSet results) {

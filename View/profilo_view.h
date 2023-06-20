@@ -2,20 +2,30 @@
 #define PROFILO_VIEW_H
 
 #include "view.h"
+#include "Model/utente.h"
 #include <QObject>
-#include <QTableWidget>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QLabel>
+#include <QPushButton>
 
 class profilo_view : public View {
     Q_OBJECT
 private:
-    //inserire tutti gli oggetti di QT
-    QTableWidget* table;
+    QHBoxLayout* hbox;
+    QVBoxLayout* vbox1;
+    QVBoxLayout* vbox2;
+    QPushButton* indietro;
+
 protected:
     explicit profilo_view();
 
 public:
-    explicit profilo_view(const QSize& s, View *parent = nullptr);
+    explicit profilo_view(const QSize& s, utente* ut, View *parent = nullptr );
     void closeEvent(QCloseEvent *event) override;
+
+signals:
+    void indietro_signal() const;
 };
 
 #endif // PROFILO_VIEW_H

@@ -15,6 +15,7 @@ SOURCES += \
     Controller/controller.cpp \
     Controller/login_controller.cpp \
     Controller/menu_controller.cpp \
+    Controller/profilo_controller.cpp \
     Controller/registrazione_controller.cpp \
     Model/aula.cpp \
     Model/aulaConcerto.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     Controller/controller.h \
     Controller/login_controller.h \
     Controller/menu_controller.h \
+    Controller/profilo_controller.h \
     Controller/registrazione_controller.h \
     Model/aula.h \
     Model/aulaConcerto.h \

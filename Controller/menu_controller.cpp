@@ -20,7 +20,7 @@ void MenuController::Profilo_enter() const {
     newW->show();
     hide();
 }
-void MenuController::MyPren_enter() const {
+/*void MenuController::MyPren_enter() const {
     myPren_view* newW =new myPren_view(QSize(300,400), view);
     newW->show();
     hide();
@@ -30,7 +30,7 @@ void MenuController::Pren_enter() const {
     newW->show();
     hide();
 }
-
+*/
 void MenuController::onViewClosed() const {
     delete this;
 }

@@ -2,6 +2,7 @@
 #define ADMIN_VIEW_H
 
 #include "view.h"
+#include "pren_item.h"
 #include "Model/storage.h"
 #include <QTableWidget>
 

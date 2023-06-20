@@ -3,6 +3,7 @@
 
 #include "controller.h"
 #include "View/menu_view.h"
+#include "View/profilo_view.h"
 #include "Model/storage.h"
 
 class MenuController : public Controller {

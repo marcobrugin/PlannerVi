@@ -36,7 +36,7 @@ public slots:
     void onRegisterButtonClicked();
 signals:
     void RegClicked() const;
-    void Utente_add_signal(const string&, const string&, const string&, const string&, const string&, const string&, const string& ) const;
+    void Utente_add_signal(const QString&, const QString&, const QString&, const QString&, const QString&, const QString&, const QString& ) const;
 };
 
 #endif // REGISTRAZIONE_VIEW_H

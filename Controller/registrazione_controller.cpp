@@ -9,13 +9,14 @@ storage* RegController::getModel()const {
 registrazione_view* RegController::getView() const{
     return static_cast<registrazione_view*>(view) ;
 }
-
+/*
 void RegController::Registr_enter(string _nome, string _cogn ) const {
     utente* nu= new utente (_nome, _cogn);
-    /*for (int var = 0; var < total; ++var) {
+    for (int var = 0; var < total; ++var) {
         if()//controllo sulla mail
     };
-    */
+
+
     getModel()->addUtente(nu);
     //CLICCANDO SU REGISTRA deve inserire gli argomenti passati nel vettore<utenti> pers in storage
     // + controllare che la mail non sia già presente (utente già esistente)
@@ -24,7 +25,7 @@ void RegController::Registr_enter(string _nome, string _cogn ) const {
     login_view* logW =new login_view(QSize(300,400), view);
     logW->show();
     hide();
-}
+}*/
 
 void RegController::onViewClosed() const {
     delete this;
