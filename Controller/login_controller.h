@@ -2,6 +2,7 @@
 #define LOGIN_CONTROLLER_H
 
 #include "controller.h"
+#include "registrazione_controller.h"
 #include "menu_controller.h"
 #include "admin_controller.h"
 #include "View/login_view.h"
@@ -13,9 +14,9 @@
 class LoginController : public Controller {
     Q_OBJECT
 protected:
-    LoginController();
+    explicit LoginController();
 public:
-    LoginController(storage*, login_view*, Controller* = nullptr);
+    explicit LoginController(storage*, login_view*, Controller* = nullptr);
     storage* getModel() const override;
     login_view* getView() const override;
 public slots:

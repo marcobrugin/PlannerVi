@@ -2,7 +2,6 @@
 #define ADMIN_VIEW_H
 
 #include "view.h"
-#include "pren_item.h"
 #include "Model/storage.h"
 #include <QTableWidget>
 
@@ -18,7 +17,6 @@ public:
 signals:
     void aggiornaPagina_signal();
 
-    void showPren_signal(const pren_item* pr);
     void modificaPren_signal(const pren_item* pr);
     void eliminaPren_signal(const pren_item* pr);
 };

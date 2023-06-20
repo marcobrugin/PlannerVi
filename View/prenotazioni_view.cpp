@@ -12,7 +12,6 @@ prenotazioni_view::prenotazioni_view(const QSize& s, QString& m, View* parent) :
 
     vbox->addLayout(hbox);
     connect(indietro,SIGNAL(clicked(bool)),this,SIGNAL(indietro_signal()));
-
 }
 
 void prenotazioni_view::create_table(const QStringList& intestazioni){
@@ -28,8 +27,10 @@ void prenotazioni_view::carica_pren(const contenitore<prenotazione*>& pren){
     int i=0;
     for(auto j: pren){
         pren_table->insertRow(i);
-        QLabel* l = new QLabel(j, this);
-        pren_table->setCellWidget(i, 0, l);
+        QLabel* aulaLabel = new QLabel(j->getNumero, this); //dell'aula mi serve solo il numero
+        pren_table->setCellWidget(i, 0, aulaLabel);
+        QLabel* dataLabel = new QLabel(j->getData(), this);
+        pren_table->setCellWidget(i, 0, dataLabel);
         i++;
     }
 

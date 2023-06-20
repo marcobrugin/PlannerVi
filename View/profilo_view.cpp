@@ -1,6 +1,6 @@
 #include "profilo_view.h"
 
-profilo_view::profilo_view(const QSize& s, utente* ut, View* parent) : View(s, ut, parent)
+profilo_view::profilo_view(const QSize& s, const utente* ut, View* parent) : View(s, parent), persona(ut)
 {
     //view->setTitle="SCHEDA UTENTE"
     hbox= new QHBoxLayout(this);

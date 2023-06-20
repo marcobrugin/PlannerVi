@@ -9,9 +9,9 @@
 class AdminController: public Controller {
     Q_OBJECT
 protected:
-    AdminController();
+    explicit AdminController();
 public:
-    AdminController(storage*, admin_view*, Controller* = nullptr);
+    explicit AdminController(storage*, admin_view*, Controller* = nullptr);
     storage* getModel() const override;
     admin_view* getView() const override;
 public slots:

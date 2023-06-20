@@ -9,9 +9,9 @@
 class MenuController : public Controller {
     Q_OBJECT
 protected:
-    MenuController();
+    explicit MenuController();
 public:
-    MenuController(storage* , menu_view* , Controller* = nullptr);
+    explicit MenuController(storage* , menu_view* , Controller* = nullptr);
     void AulaView() const;
     void PrenView() const;
     storage* getModel() const override;

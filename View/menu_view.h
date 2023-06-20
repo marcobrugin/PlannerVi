@@ -26,7 +26,7 @@ protected:
     explicit menu_view();//costr
 
 public:
-    explicit menu_view(const QSize& s, QString& m, View* parent=nullptr);
+    explicit menu_view(const QSize& s, const QString& m, View* parent=nullptr);
     void closeEvent(QCloseEvent *event) override;
 
 signals:

@@ -16,12 +16,12 @@ private:
     QVBoxLayout* vbox1;
     QVBoxLayout* vbox2;
     QPushButton* indietro;
-    QString mail;
+    const utente* persona;
 protected:
     explicit profilo_view();
 
 public:
-    explicit profilo_view(const QSize& s, QString m, View *parent = nullptr );
+    explicit profilo_view(const QSize& s, const utente* m, View *parent = nullptr );
     void closeEvent(QCloseEvent *event) override;
 
 signals:

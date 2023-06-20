@@ -1,6 +1,6 @@
 #include "menu_view.h"
 
-menu_view::menu_view(const QSize & s, QString& m, View * parent) : View(s,parent), mail(m) {
+menu_view::menu_view(const QSize & s, const QString& m, View * parent) : View(s,parent), mail(m) {
 
     vbox = new QVBoxLayout(this);
 

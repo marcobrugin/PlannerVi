@@ -26,9 +26,11 @@ void LoginController::Login_enter(const string& em, const string& pass) const {
                     admin_view* aW = new admin_view(QSize(300,400), view);
                     aW->show();
                     AdminController* aC = new AdminController(getModel() , aW , const_cast<LoginController*>(this));
+                    aC->show();
+                    hide();
                 }
                 else{
-                menu_view* menuW = new menu_view(QSize(300,400), view); //posso passargli pure la mail dell'utente?
+                menu_view* menuW = new menu_view(QSize(300,400), QString::fromStdString(em), view); //posso passargli pure la mail dell'utente?
                 menuW->show();
                 MenuController* menuC = new MenuController(getModel() , menuW , const_cast<LoginController*>(this));
                 menuC->show();
@@ -48,6 +50,8 @@ void LoginController::Login_enter(const string& em, const string& pass) const {
 void LoginController::Label_enter() const {
     registrazione_view* regW =new registrazione_view(QSize(300,400), view);
     regW->show();
+    RegController* regC = new RegController(getModel() , regW , const_cast<LoginController*>(this));
+    regC->show();
     hide();
 }
 
