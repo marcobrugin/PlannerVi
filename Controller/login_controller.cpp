@@ -21,7 +21,7 @@ void LoginController::Login_enter(const string& em, const string& pass) const {
         if(it->getEmail()==em){ //trova corrispondenza email nello storage
             find=0;
             if(it->getPassword()==pass){ //controllo correttezza password
-                //MANCA IL CONTROLLO SUL UTENTE VS ADMIN PER LA VISUALIZZAZIONE DELLA RELATIVA SCHEDA
+                //CONTROLLO SUL UTENTE VS ADMIN PER LA VISUALIZZAZIONE DELLA RELATIVA SCHEDA
                 if(it->getEmail()=="admin"){
                     admin_view* aW = new admin_view(QSize(300,400), view);
                     aW->show();

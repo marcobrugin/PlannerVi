@@ -13,25 +13,26 @@
 class menu_view : public View {
     Q_OBJECT
 private:
-    QVBoxLayout *vbox;
+    QVBoxLayout* vbox;
     QLabel* logoLabel;
     QLabel* benvenuto;
     QHBoxLayout* HLayout;
     QPushButton* viewProfilo;
     QPushButton* viewMyPren;
     QPushButton* viewTuttePren;
+    QString mail;
 
 protected:
     explicit menu_view();//costr
 
 public:
-    explicit menu_view(const QSize&, View*);
+    explicit menu_view(const QSize& s, QString& m, View* parent=nullptr);
     void closeEvent(QCloseEvent *event) override;
 
 signals:
-    void View_profilo_signal() const;
-    void View_my_signal() const;
-    void View_tutte_signal() const;
+    void View_profilo_signal(QString) const;
+    void View_my_signal(QString) const;
+    void View_tutte_signal(QString) const;
 };
 
 #endif // MENU_VIEW_H

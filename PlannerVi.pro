@@ -28,7 +28,7 @@ SOURCES += \
     View/admin_view.cpp \
     View/login_view.cpp \
     View/menu_view.cpp \
-    View/pren_item.cpp \
+    View/prenotazioni_view.cpp \
     View/profilo_view.cpp \
     View/registrazione_view.cpp \
     View/view.cpp \
@@ -53,7 +53,7 @@ HEADERS += \
     View/admin_view.h \
     View/login_view.h \
     View/menu_view.h \
-    View/pren_item.h \
+    View/prenotazioni_view.h \
     View/profilo_view.h \
     View/registrazione_view.h \
     View/view.h

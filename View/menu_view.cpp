@@ -1,6 +1,6 @@
 #include "menu_view.h"
 
-menu_view::menu_view(const QSize & s, View * parent) : View(s,parent) {
+menu_view::menu_view(const QSize & s, QString& m, View * parent) : View(s,parent), mail(m) {
 
     vbox = new QVBoxLayout(this);
 
@@ -14,7 +14,7 @@ menu_view::menu_view(const QSize & s, View * parent) : View(s,parent) {
     benvenuto = new QLabel("Benvenuto!", this);
     benvenuto->setAlignment(Qt::AlignCenter);
     vbox->addWidget(benvenuto);
-    QLabel* ut = new QLabel ("Accesso effettuato come ...", this); //manca la MAIL
+    QLabel* ut = new QLabel ("Accesso effettuato come "+m, this);
     vbox->addWidget(ut);
     vbox->addStretch();
 
@@ -28,9 +28,9 @@ menu_view::menu_view(const QSize & s, View * parent) : View(s,parent) {
     vbox->addWidget(viewTuttePren);
 
     // Connessione dei pulsanti ai segnali
-    connect(viewProfilo,SIGNAL(clicked(bool)),this,SIGNAL(View_profilo_signal()));
-    connect(viewMyPren,SIGNAL(clicked(bool)),this,SIGNAL(View_my_signal()));
-    connect(viewTuttePren,SIGNAL(clicked(bool)),this,SIGNAL(View_tutte_signal()));
+    connect(viewProfilo,SIGNAL(clicked(bool)),this,SIGNAL(View_profilo_signal(m)));
+    connect(viewMyPren,SIGNAL(clicked(bool)),this,SIGNAL(View_my_signal(m)));
+    connect(viewTuttePren,SIGNAL(clicked(bool)),this,SIGNAL(View_tutte_signal(m)));
 }
 
 void menu_view::closeEvent(QCloseEvent *event){
