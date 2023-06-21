@@ -1,80 +1,99 @@
 #include "admin_view.h"
 
-#include <QVBoxLayout>
-#include <QScrollArea>
-#include <QLabel>
-#include <QPushButton>
+admin_view::admin_view(const QSize& s, View* parent) : View(s, parent){
+    vbox=new QVBoxLayout(this);
+    hbox=new QHBoxLayout(this);
+    QLabel* titolo=new QLabel("VISUALIZZAZIONE ADMIN PRENOTAZIONI ", this);
+    hbox->addWidget(titolo);
+    indietro = new QPushButton("Torna al menu", this);
+    hbox->addWidget(indietro);
 
-admin_view::admin_view(const QSize& s, View* parent) : View(s, parent)
-{
-    QHBoxLayout* hbox = new QHBoxLayout();
-    hbox->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    vbox->addLayout(hbox);
+    connect(indietro,SIGNAL(clicked(bool)),this,SIGNAL(indietro_signal()));
+}
 
-    QVBoxLayout* vbox = new QVBoxLayout(this);
-    vbox->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+void admin_view::create_table(const QStringList& intestazioni){
+    pren_table->setColumnCount(7);
+    pren_table->setHorizontalHeaderLabels(intestazioni);
+    pren_table->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    pren_table->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    pren_table->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContentsOnFirstShow);
+    vbox->addWidget(pren_table);
+}
 
-    QLabel* titolo = new QLabel("ADMIN", this);
-    vbox->addWidget(titolo);
-    vbox->addStretch();
+void admin_view::visualizza_prenotazioni(const contenitore<prenotazione*>& pren){
+    int i=0;
+    for(auto j: pren){
+        pren_table->insertRow(i);
+        QLabel* aulaLabel = new QLabel(j->getNumero, this); //dell'aula mi serve solo il numero
+        pren_table->setCellWidget(i, 0, aulaLabel);
+        QLabel* dataLabel = new QLabel(j->getData(), this);
+        pren_table->setCellWidget(i, 0, dataLabel);
+        i++;
+    }
 
-    QPushButton* new_aulaConcerto = new QPushButton ("Nuova aula concerto", this);
-    QPushButton* new_aulaStrumentale = new QPushButton ("Nuova aula strumentale", this);
-    QPushButton* new_aulaStudio = new QPushButton ("Nuova aula studio", this);
-    vbox->addWidget(new_aulaConcerto);
-    vbox->addWidget(new_aulaStrumentale);
-    vbox->addWidget(new_aulaStudio);
-    hbox->addLayout(vbox);
+    QDate oggi = QDate::currentDate();
 
-    //ora devo creare un QTable al cui interno avere 2 colonne, la prima contiene i vari oggetti Aula, la seconda contiene i pulsanti modify e delete
+    int annoAccademico=oggi.year();
+    if (oggi.month() > 7 || (oggi.month() == 7 && oggi.day() >= 15)) {
+        annoAccademico++; // Incrementa il range di annuale disponibile se oggi>15.07
+    }
 
-    //connessione ai segnali
-    connect(new_aulaConcerto,SIGNAL(clicked(bool)),this,SIGNAL(addAConcerto_signal()));
-    connect(new_aulaStrumentale,SIGNAL(clicked(bool)),this,SIGNAL(addAStrumentale_signal()));
-    connect(new_aulaStudio,SIGNAL(clicked(bool)),this,SIGNAL(addAStudio_signal()));
+    pren_table->insertRow(i);
+    _aula = new QLineEdit(this);
+    pren_table->setCellWidget(i,0,_aula);
+    _data = new QDateEdit(this);
+    _data->setCalendarPopup(true); // Abilita il calendario a comparsa
+    _data->setDateRange(oggi.addDays(1), QDate(annoAccademico, 7, 15)); // Imposta il range di date
+    pren_table->setCellWidget(i,1,_data);
+    _oraArrivo = new QTimeEdit(this);
+    _oraArrivo->setDisplayFormat("hh:mm");
+    _oraArrivo->setTimeRange(QTime(9, 0), QTime(18, 30));
+    pren_table->setCellWidget(i,2,_oraArrivo);
+    _oraUscita = new QTimeEdit(this);
+    _oraUscita->setDisplayFormat("hh:mm"); // Imposta il formato di visualizzazione senza i secondi
+    _oraUscita->setTimeRange(QTime(9, 30), QTime(19, 0));
+    pren_table->setCellWidget(i,3,_oraUscita);
+    _causale = new QTextEdit(this);
+    pren_table->setCellWidget(i,4,_causale);
+    _mail = new QLabel(mail, this);
+    pren_table->setCellWidget(i,5,_mail);
 
-    //mancano i segnali di modify della singola aula e di delete
+    aggiungi = new QPushButton ("+", this);
+    pren_table->setCellWidget(i,6,aggiungi);
 
-
- //l'idea è quella di inserire nella scroll_area le varie aule tramite un for...per visualizzarle tutte
-    // vicino ad ogni aula devono esserci 2 pulsanti: "MODIFICA" ed "ELIMINA"
-
-    //MODIFICA porta a scheda_modifica.h mentre ELIMINA deve eliminare l'aula dallo storage
-
+    // Connessione del pulsante di login allo slot onLoginButtonClicked()
+    connect(aggiungi, SIGNAL(clicked()), this, SIGNAL (ButtonClicked()));
+    connect(this,SIGNAL(ButtonClicked()),this,SLOT(aggiungi_pren()));
 }
 
 
+void admin_view::aggiungi_pren(){
+    QString aula = _aula->text();
+    QDate data = _data->date();
+    QTime oraArrivo= _oraArrivo->time();
+    QTime oraUscita= _oraArrivo->time();
+    QString causale= _causale->toPlainText();
 
-//MI SERVE SOLO COME SPUNTO!!!
-/*void ResultsWidget::showResults(Engine::Query query, Engine::ResultSet results) {
-    // Clears previous data
-    while (!lookup.isEmpty()) {
-        WidgetLookup info = lookup.takeLast();
-        delete info.getWidget();
+    //controllo errori basilari
+    if(aula.isNull() || aula.isEmpty() || data.isNull() || oraArrivo.isNull() || oraUscita.isNull() || causale.isEmpty() || causale.isNull()){
+        static_cast<View*>(this)->showError("Inserimento non valido", "I valori inseriti non sono accettati");
     }
-
-    // Shows new data
-    if (results.getTotal() > 0) {
-        results_total->setText(QString::number(results.getTotal()) + " results for \"" + QString::fromStdString(query.getText()) + "\":");
-    }
-    else {
-        results_total->setText("No results for \"" + QString::fromStdString(query.getText()) + "\".");
-    }
-    previous_page->setEnabled(query.getOffset() > 0);
-    next_page->setEnabled(results.getItems().size() == query.getSize());
-    renderer->render(grid, results, &lookup);
-
-    // Connects signals
-    for (
-        QVector<WidgetLookup>::const_iterator it = lookup.begin();
-        it != lookup.end();
-        it++
-        ) {
-        if (it->getEditButton()) {
-            connect(it->getEditButton(), &QPushButton::clicked, std::bind(&ResultsWidget::editItem, this, it->getItem()));
-        }
-        if (it->getDeleteButton()) {
-            connect(it->getDeleteButton(), &QPushButton::clicked, std::bind(&ResultsWidget::deleteItem, this, it->getItem()));
-        }
+    else{
+        emit aggiungi_signal(aula, data, oraArrivo, oraUscita, causale, mail);
     }
 }
-*/
+
+void admin_view::rimuovi_prenotazione(uint i){
+    pren_table->removeRow(i);
+}
+
+void admin_view::closeEvent(QCloseEvent *event){
+    if(QMessageBox::question(this,"Uscita","Vuoi uscire davvero?",QMessageBox::Yes|QMessageBox::No)==QMessageBox::Yes){
+        event->accept();
+        emit viewClosed();
+    }
+    else
+        event->ignore();
+}
+

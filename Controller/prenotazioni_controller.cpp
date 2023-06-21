@@ -20,11 +20,10 @@ void PrenController::aggiungi_enter(const QString& aula, const QDate& data, cons
 //deve aggiungere al file JSON la nuova prenotazione
 }
 
-void PrenController::indietro_enter(const QString& mail) const {
-    menu_view* menuW =new menu_view(QSize(300,400), mail, view);
-    menuW->show();
-    hide();
-    MenuController* menuC = new MenuController(getModel() , menuW , const_cast<PrenController*>(this));
-    menuC->show();
-    hide();
+void PrenController::indietro_enter() const {
+    if(view->parent()){
+        static_cast<View*>(view->parent())->show(); //è corretto?
+        hide();
+        delete this;
+    }
 }

@@ -24,7 +24,6 @@ public:
 
 public slots:
     virtual void onViewClosed() const=0 ;
-    //virtual void onBack() const;
 };
 
 #endif // CONTROLLER_H

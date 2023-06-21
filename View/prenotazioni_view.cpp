@@ -27,9 +27,9 @@ void prenotazioni_view::carica_pren(const contenitore<prenotazione*>& pren){
     int i=0;
     for(auto j: pren){
         pren_table->insertRow(i);
-        QLabel* aulaLabel = new QLabel(j->getNumero, this); //dell'aula mi serve solo il numero
+        QLabel* aulaLabel = new QLabel(QString::number(j->getNumero), this); //dell'aula mi serve solo il numero
         pren_table->setCellWidget(i, 0, aulaLabel);
-        QLabel* dataLabel = new QLabel(j->getData(), this);
+        QLabel* dataLabel = new QLabel(j->getData().toString("dd-MM-yyyy"), this);
         pren_table->setCellWidget(i, 0, dataLabel);
         i++;
     }

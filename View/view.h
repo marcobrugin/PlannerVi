@@ -28,7 +28,7 @@ public:
 
     void setDim(const QSize&); //setta la dimensione delle schermate
 
-    void setViewTitle(const QString &); //setta il titolo della schermata
+    void setTitolo(const QString &); //setta il titolo della schermata
 
     void closeEvent(QCloseEvent *) override; //per chiusura schermata
 

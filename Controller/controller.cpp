@@ -17,14 +17,3 @@ void Controller::show() const {
 void Controller::hide() const {
     view->hide();
 }
-/* void Controller::onBack() const{
-    if(QMessageBox::question(view,"Indietro", "Vuoi tornare indietro?"), QMessageBox::Yes|QMessageBox::No)== QMessageBox::Yes)
-    {
-        if(view->parent()){
-            static_cast<View*>(view->parent())->show();
-            hide();
-            delete this;
-        }}
-
-}
-*/
