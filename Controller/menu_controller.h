@@ -17,7 +17,7 @@ public:
     storage* getModel() const override;
     menu_view* getView() const override;
 public slots:
-    void Profilo_enter() const;
+    void Profilo_enter(const QString&) const;
     void MyPren_enter() const;
     void Pren_enter() const;
     void onViewClosed() const override;

@@ -96,6 +96,7 @@ void admin_view::aggiungi_pren(){
 
 void admin_view::rimuovi_prenotazione(uint i){
     pren_table->removeRow(i);
+    emit rimuovi_signal(i);
 }
 
 void admin_view::closeEvent(QCloseEvent *event){

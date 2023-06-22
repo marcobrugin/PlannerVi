@@ -27,17 +27,17 @@ void prenotazioni_view::carica_pren(const contenitore<prenotazione*>& pren){
     int i=0;
     for(auto j: pren){
         pren_table->insertRow(i);
-        QLabel* aulaLabel = new QLabel(QString::number(j->getNumero), this); //dell'aula mi serve solo il numero
+        QLabel* aulaLabel = new QLabel(QString::number(j->getAula()->getNumero()), this);
         pren_table->setCellWidget(i, 0, aulaLabel);
         QLabel* dataLabel = new QLabel(j->getData().toString("dd-MM-yyyy"), this);
         pren_table->setCellWidget(i, 1, dataLabel);
-        QLabel* oraArrivoLabel = new QLabel(j->getOraArrivo().toString("hh-mm"), this);
+        QLabel* oraArrivoLabel = new QLabel(j->getOraArrivo().toString("hh-mm"), this);//se sistemo QTime nel model dovrebbe funzionare
         pren_table->setCellWidget(i, 2, oraArrivoLabel);
-        QLabel* oraUscitaLabel = new QLabel(j->getOraUscita().toString("dd-MM-yyyy"), this);
+        QLabel* oraUscitaLabel = new QLabel(j->getOraUscita().toString("hh-mm"), this);
         pren_table->setCellWidget(i, 3, oraUscitaLabel);
-        QLabel* causaleLabel = new QLabel(j->getCausale(), this);
+        QLabel* causaleLabel = new QLabel(QString::fromStdString(j->getCausale()), this);
         pren_table->setCellWidget(i, 4, causaleLabel);
-        QLabel* emailLabel = new QLabel(j->getPersona(), this); //però mi serve solo la mail
+        QLabel* emailLabel = new QLabel(QString::fromStdString(j->getPersona()->getEmail()), this); //però mi serve solo la mail
         pren_table->setCellWidget(i, 5, causaleLabel);
 
         i++;
@@ -76,6 +76,10 @@ void prenotazioni_view::carica_pren(const contenitore<prenotazione*>& pren){
     // Connessione del pulsante di login allo slot onLoginButtonClicked()
     connect(aggiungi, SIGNAL(clicked()), this, SIGNAL (ButtonClicked()));
     connect(this,SIGNAL(ButtonClicked()),this,SLOT(aggiungi_pren()));
+}
+
+void prenotazioni_view::addToView(prenotazione*){
+    //guarda dove row()-2 ecc...
 }
 
 

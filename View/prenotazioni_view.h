@@ -38,6 +38,7 @@ public:
 
     void create_table(const QStringList&);
     void carica_pren(const contenitore<prenotazione*>& );
+    void addToView(prenotazione*);
 
 public slots:
     void aggiungi_pren();

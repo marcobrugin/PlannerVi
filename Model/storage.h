@@ -33,7 +33,7 @@ public:
     aula* searchAula(const int piano, const int numero);
 
     void addPrenotazione(prenotazione* pr);
-    void removePrenotazione(prenotazione* pr);
+    void removePrenotazione(uint i);
     prenotazione* searchPrenotazione(const QDate& data, const aula* aulaRiferimento);
 
     void addUtente(utente* ut);

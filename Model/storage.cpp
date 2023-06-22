@@ -62,10 +62,11 @@ void storage::removeAula(aula* aulaToRemove) {
 
 void storage::addPrenotazione(prenotazione* pr) {
     prenotazioni.insertSorted(pr, [](const prenotazione* a, const prenotazione* b) {
-        return a->getData() < b->getData();
+        return a->getData() < b->getData() && a->getAula() < b->getAula() && a->getOraArrivo() < b->getOraArrivo();
     });
 }
 
-void storage::removePrenotazione(prenotazione* prToRemove) {
-    prenotazioni.remove(prToRemove);
+void storage::removePrenotazione(uint i) {
+    prenotazioni.remove(i);
 }
+

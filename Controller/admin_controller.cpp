@@ -3,8 +3,8 @@
 AdminController::AdminController(){}
 
 AdminController::AdminController(storage* s, admin_view * a, Controller* c) : Controller(s, a, c){
-    //connect(view,SIGNAL(Login_signal(em, pass)),this,SLOT(Login_enter(em, pass)));
-    //connect(view,SIGNAL(Label_signal()),this,SLOT(Label_enter()));
+    connect(view,SIGNAL(rimuovi_signal(i)),this,SLOT(rimuovi_enter(i)));
+    //connect(view,SIGNAL(Label_signal()),this,SLOT(Label_enter())); AGGIUNTA
 }
 storage* AdminController::getModel()const {
     return static_cast<storage*>(mod);
@@ -13,6 +13,11 @@ storage* AdminController::getModel()const {
 admin_view* AdminController::getView() const{
     return static_cast<admin_view*>(view) ;
 }
+
+void AdminController::rimuovi_enter(uint i){
+    getModel()->removePrenotazione(i);
+}
+
 void AdminController::onViewClosed() const {
     delete this;
 }

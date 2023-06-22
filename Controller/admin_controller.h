@@ -15,7 +15,7 @@ public:
     storage* getModel() const override;
     admin_view* getView() const override;
 public slots:
-
+    void rimuovi_enter(uint i);
     void onViewClosed() const override;
 };
 

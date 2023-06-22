@@ -12,8 +12,8 @@ class prenotazione{
 private:
     utente* persona;
     QDate data;
-    int oraArrivo;
-    int oraUscita;
+    QTime oraArrivo;
+    QTime oraUscita;
     string causale;
     aula* aula_pr;
 
