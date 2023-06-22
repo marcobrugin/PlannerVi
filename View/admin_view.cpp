@@ -28,7 +28,16 @@ void admin_view::visualizza_prenotazioni(const contenitore<prenotazione*>& pren)
         QLabel* aulaLabel = new QLabel(j->getNumero, this); //dell'aula mi serve solo il numero
         pren_table->setCellWidget(i, 0, aulaLabel);
         QLabel* dataLabel = new QLabel(j->getData(), this);
-        pren_table->setCellWidget(i, 0, dataLabel);
+        pren_table->setCellWidget(i, 1, dataLabel);
+
+
+        rimuovi = new QPushButton("-",this);
+        pren_table->setCellWidget(i, 6, rimuovi);
+        connect (rimuovi, &QPushButton::clicked,[this, rimuovi](){
+            unsigned int riga = pren_table->indexAt(rimuovi->pos()).row();
+            emit rimuovi_prenotazione(riga);
+        });
+
         i++;
     }
 
@@ -56,13 +65,13 @@ void admin_view::visualizza_prenotazioni(const contenitore<prenotazione*>& pren)
     pren_table->setCellWidget(i,3,_oraUscita);
     _causale = new QTextEdit(this);
     pren_table->setCellWidget(i,4,_causale);
-    _mail = new QLabel(mail, this);
+    _mail = new QTextEdit(this);
     pren_table->setCellWidget(i,5,_mail);
 
     aggiungi = new QPushButton ("+", this);
     pren_table->setCellWidget(i,6,aggiungi);
 
-    // Connessione del pulsante di login allo slot onLoginButtonClicked()
+    // Connessione del pulsante di aggiunta allo slot aggiungi_pren()
     connect(aggiungi, SIGNAL(clicked()), this, SIGNAL (ButtonClicked()));
     connect(this,SIGNAL(ButtonClicked()),this,SLOT(aggiungi_pren()));
 }
@@ -74,6 +83,7 @@ void admin_view::aggiungi_pren(){
     QTime oraArrivo= _oraArrivo->time();
     QTime oraUscita= _oraArrivo->time();
     QString causale= _causale->toPlainText();
+    QString mail= _mail->toPlainText();
 
     //controllo errori basilari
     if(aula.isNull() || aula.isEmpty() || data.isNull() || oraArrivo.isNull() || oraUscita.isNull() || causale.isEmpty() || causale.isNull()){
