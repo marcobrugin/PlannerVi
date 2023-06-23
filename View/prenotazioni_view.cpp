@@ -97,14 +97,14 @@ void prenotazioni_view::addToView(prenotazione* pr){
 }
 
 void prenotazioni_view::aggiungi_pren(){
-    QString aula = _aula->text();
+    int aula = (_aula->text()).toInt();
     QDate data = _data->date();
     QTime oraArrivo= _oraArrivo->time();
     QTime oraUscita= _oraArrivo->time();
     QString causale= _causale->toPlainText();
 
     //controllo errori basilari
-    if(aula.isNull() || aula.isEmpty() || data.isNull() || oraArrivo.isNull() || oraUscita.isNull() || causale.isEmpty() || causale.isNull()){
+    if(aula!=NULL || data.isNull() || oraArrivo.isNull() || oraUscita.isNull() || causale.isEmpty() || causale.isNull()){
         static_cast<View*>(this)->showError("Inserimento non valido", "I valori inseriti non sono accettati");
     }
     else{

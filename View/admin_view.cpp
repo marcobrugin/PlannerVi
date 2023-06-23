@@ -37,7 +37,7 @@ void admin_view::visualizza_prenotazioni(const contenitore<prenotazione*>& pren)
         QLabel* emailLabel = new QLabel(QString::fromStdString(j->getPersona()->getEmail()), this);
         pren_table->setCellWidget(i, 5, emailLabel);
 
-        rimuovi = new QPushButton("-",this);
+        QPushButton* rimuovi = new QPushButton("-",this);
         pren_table->setCellWidget(i, 6, rimuovi);
         connect (rimuovi, &QPushButton::clicked,[this, rimuovi](){
             unsigned int riga = pren_table->indexAt(rimuovi->pos()).row();

@@ -17,12 +17,13 @@ admin_view* AdminController::getView() const{
     return static_cast<admin_view*>(view) ;
 }
 
-void AdminController::aggiungi_enter(const int& aula, const QDate& data, const QTime& oraArrivo, const QTime& oraUscita, const QString& causale, const QString& mail) const {
+void AdminController::aggiungi_enter(const int& _aula, const QDate& data, const QTime& oraArrivo, const QTime& oraUscita, const QString& causale, const QString& mail) const {
     string _causale=causale.toStdString();
     string _mail=mail.toStdString();
     utente* ut;
+    aula* au;
     for(auto i : getModel()->getContPren()){
-        if(i->getAula()->getNumero() == aula && i->getData()==data ){
+        if(i->getAula()->getNumero() == _aula && i->getData()==data ){
             QTime arrivo= i->getOraArrivo();
             QTime uscita= i->getOraUscita();
             if((oraArrivo>=arrivo && oraArrivo<uscita) || (oraUscita>arrivo && oraUscita<=uscita) || (oraArrivo<= arrivo && oraUscita>=uscita)){
@@ -31,9 +32,10 @@ void AdminController::aggiungi_enter(const int& aula, const QDate& data, const Q
             return;
         }
         ut=i->getPersona();
+        au=i->getAula();
     }
     //mettere in ordine ed estrapolare l'utente* dalla mail
-    prenotazione* nuova = new prenotazione(aula,data,oraArrivo,oraUscita,causale.toStdString(),ut);//con le conversioni adeguate!
+    prenotazione* nuova = new prenotazione(ut,data,oraArrivo,oraUscita,causale.toStdString(),au);
     getModel()->addPrenotazione(nuova);
     getView()->addToView(nuova);
 }

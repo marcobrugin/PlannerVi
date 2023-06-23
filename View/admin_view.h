@@ -22,7 +22,6 @@ private:
     QVBoxLayout* vbox;
     QHBoxLayout* hbox;
     QPushButton* aggiungi;
-    QPushButton* rimuovi;
     QPushButton* indietro;
 
     QRegularExpressionValidator* validator;
@@ -49,7 +48,7 @@ public slots:
     void aggiungi_pren();
 
 signals:
-    void aggiungi_signal(int aula, QDate data, QTime oraArrivo, QTime oraUscita, QString causale, QString mail);
+    void aggiungi_signal(const int& aula, const QDate& data, const QTime& oraArrivo, const QTime& oraUscita, const QString& causale, const QString& mail);
     void rimuovi_signal(uint);
 };
 

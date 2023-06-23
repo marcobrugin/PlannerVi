@@ -19,7 +19,9 @@ void ProfiloController::onViewClosed() const {
 }
 
 void ProfiloController::indietro_enter() const {
-    menu_view* menuW =new menu_view(QSize(300,400), view);
-    menuW->show();
-    hide();
+    if(view->parent()){
+        static_cast<View*>(view->parent())->show();
+        hide();
+        delete this;
+    }
 }

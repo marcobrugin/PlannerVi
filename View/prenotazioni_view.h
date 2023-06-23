@@ -47,7 +47,7 @@ public slots:
 
 signals:
     void indietro_signal() const;
-    void aggiungi_signal(const QString&, const QDate&, const QTime&, const QTime&, const QString&, const QString&)const;
+    void aggiungi_signal(const int&, const QDate&, const QTime&, const QTime&, const QString&, const QString&);
     void rimuovi_signal(uint);
 };
 

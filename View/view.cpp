@@ -18,7 +18,7 @@ void View::showMessage(const QString& t,const QString& i)  {
 void View::showError(const QString& t ,const QString& i )  {
     QMessageBox::critical(this,t,i,QMessageBox::Ok);
 }
-void View::setViewTitle(const QString &title) {
+void View::setTitolo(const QString &title) {
     setWindowTitle(title);
 }
 void View::closeEvent(QCloseEvent *event){
