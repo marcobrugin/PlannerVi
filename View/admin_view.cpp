@@ -3,7 +3,7 @@
 admin_view::admin_view(const QSize& s, View* parent) : View(s, parent){
     vbox=new QVBoxLayout(this);
     hbox=new QHBoxLayout(this);
-    QLabel* titolo=new QLabel("VISUALIZZAZIONE ADMIN PRENOTAZIONI ", this);
+    QLabel* titolo=new QLabel("GESTIONE PRENOTAZIONI ", this);
     hbox->addWidget(titolo);
     indietro = new QPushButton("Torna al menu", this);
     hbox->addWidget(indietro);
@@ -26,13 +26,20 @@ void admin_view::visualizza_prenotazioni(const contenitore<prenotazione*>& pren)
     for(auto j: pren){
         pren_table->insertRow(i);
         QLabel* aulaLabel = new QLabel(QString::number(j->getAula()->getNumero()), this);         pren_table->setCellWidget(i, 0, aulaLabel);
-        QLabel* dataLabel = new QLabel((j->getData()).toString(), this);
+        QLabel* dataLabel = new QLabel((j->getData()).toString("dd-MM-yyyy"), this);
         pren_table->setCellWidget(i, 1, dataLabel);
-
+        QLabel* oraArrivoLabel = new QLabel(j->getOraArrivo().toString("hh-mm"), this);
+        pren_table->setCellWidget(i, 2, oraArrivoLabel);
+        QLabel* oraUscitaLabel = new QLabel(j->getOraUscita().toString("hh-mm"), this);
+        pren_table->setCellWidget(i, 3, oraUscitaLabel);
+        QLabel* causaleLabel = new QLabel(QString::fromStdString(j->getCausale()), this);
+        pren_table->setCellWidget(i, 4, causaleLabel);
+        QLabel* emailLabel = new QLabel(QString::fromStdString(j->getPersona()->getEmail()), this);
+        pren_table->setCellWidget(i, 5, emailLabel);
 
         rimuovi = new QPushButton("-",this);
         pren_table->setCellWidget(i, 6, rimuovi);
-        connect (rimuovi, &QPushButton::clicked,[this, remove](){
+        connect (rimuovi, &QPushButton::clicked,[this, rimuovi](){
             unsigned int riga = pren_table->indexAt(rimuovi->pos()).row();
             emit rimuovi_prenotazione(riga);
         });
@@ -70,7 +77,7 @@ void admin_view::visualizza_prenotazioni(const contenitore<prenotazione*>& pren)
     pren_table->setCellWidget(i,5,_mail);
 
     aggiungi = new QPushButton ("+", this);
-    pren_table->setCellWidget(i,6,aggiungi);
+    pren_table->setCellWidget(i,7,aggiungi);
 
     // Connessione del pulsante di aggiunta allo slot aggiungi_pren()
     connect(aggiungi, SIGNAL(clicked()), this, SIGNAL (ButtonClicked()));
@@ -93,6 +100,22 @@ void admin_view::aggiungi_pren(){
     else{
         emit aggiungi_signal(aula, data, oraArrivo, oraUscita, causale, mail);
     }
+}
+
+void admin_view::addToView(prenotazione* pr){
+    pren_table->insertRow(pren_table->rowCount()-1);
+    pren_table->setCellWidget(pren_table->rowCount()-2,0,new QLabel(QString::number(pr->getAula()->getNumero()),this));
+    pren_table->setCellWidget(pren_table->rowCount()-2,1,new QLabel(pr->getData().toString("dd-MM-yyyy"),this));
+    pren_table->setCellWidget(pren_table->rowCount()-2,2,new QLabel(pr->getOraArrivo().toString("hh-mm"),this));
+    pren_table->setCellWidget(pren_table->rowCount()-2,3,new QLabel(pr->getOraUscita().toString("hh-mm"),this));
+    pren_table->setCellWidget(pren_table->rowCount()-2,4,new QLabel(QString::fromStdString(pr->getCausale()),this));
+    pren_table->setCellWidget(pren_table->rowCount()-2,5,new QLabel(QString::fromStdString(pr->getPersona()->getEmail()),this));
+    QPushButton* remove=new QPushButton("-",this);
+    pren_table->setCellWidget(pren_table->rowCount()-2,7,remove);
+    connect(remove, &QPushButton::clicked,[this,remove](){
+        unsigned int riga = pren_table->indexAt(remove->pos()).row();
+        emit rimuovi_signal(riga);
+    });
 }
 
 void admin_view::rimuovi_prenotazione(uint i){

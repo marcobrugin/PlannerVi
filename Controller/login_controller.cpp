@@ -1,6 +1,7 @@
 #include "login_controller.h"
 
 LoginController::LoginController(storage* s, login_view * l, Controller* c) : Controller(s, l, c){
+    view->setTitolo("SCHEDA DI LOGIN");
     connect(view,SIGNAL(Login_signal(em, pass)),this,SLOT(Login_enter(em, pass)));
     connect(view,SIGNAL(Label_signal()),this,SLOT(Label_enter()));
 }

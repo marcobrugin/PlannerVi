@@ -42,6 +42,7 @@ public:
 
     void create_table(const QStringList&);
     void visualizza_prenotazioni(const contenitore<prenotazione*>& );
+    void addToView(prenotazione*);
     void rimuovi_prenotazione(uint);
 
 public slots:

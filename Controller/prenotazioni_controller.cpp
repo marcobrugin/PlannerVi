@@ -24,6 +24,7 @@ void PrenController::aggiungi_enter(const int& aula, const QDate& data, const QT
     string _causale=causale.toStdString();
     string _mail=mail.toStdString();
     utente* ut;
+    aula* au;
     for(auto i : getModel()->getContPren()){
         if(i->getAula()->getNumero() == aula && i->getData()==data ){
             QTime arrivo= i->getOraArrivo();
@@ -34,9 +35,10 @@ void PrenController::aggiungi_enter(const int& aula, const QDate& data, const QT
             return;
         }
         ut=i->getPersona();
+        au=i->getAula();
     }
-    //mettere in ordine ed estrapolare l'utente* dalla mail
-    prenotazione* nuova = new prenotazione(aula,data,oraArrivo,oraUscita,causale.toStdString(),ut);//con le conversioni adeguate!
+    //mettere in ordine
+    prenotazione* nuova = new prenotazione(ut,data,oraArrivo,oraUscita,causale.toStdString(),au);
     getModel()->addPrenotazione(nuova);
     getView()->addToView(nuova);
 }

@@ -1,6 +1,7 @@
 #include "menu_controller.h"
 
 MenuController::MenuController(storage* s, menu_view * m, Controller* c) : Controller(s, m, c){
+    view->setTitolo("MENU");
     connect(view,SIGNAL(View_profilo_signal(mail)),this,SLOT(Profilo_enter(mail))); //modificare anche l'origine
     connect(view,SIGNAL(View_my_signal()),this,SLOT(MyPren_enter()));
     connect(view,SIGNAL(View_tutte_signal()),this,SLOT(Pren_enter()));

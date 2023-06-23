@@ -15,6 +15,7 @@ public:
     storage* getModel() const override;
     admin_view* getView() const override;
 public slots:
+    void aggiungi_enter(const int&, const QDate&, const QTime&, const QTime&, const QString&, const QString&) const;
     void rimuovi_enter(uint i);
     void onViewClosed() const override;
 };

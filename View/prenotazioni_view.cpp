@@ -52,6 +52,8 @@ void prenotazioni_view::carica_pren(const contenitore<prenotazione*>& pren){
 
     pren_table->insertRow(i);
     _aula = new QLineEdit(this);
+    validator = new QRegularExpressionValidator(QRegularExpression("[0-9]+"), _aula);
+    _aula->setValidator(validator);
     pren_table->setCellWidget(i,0,_aula);
     _data = new QDateEdit(this);
     _data->setCalendarPopup(true); // Abilita il calendario a comparsa
@@ -78,10 +80,21 @@ void prenotazioni_view::carica_pren(const contenitore<prenotazione*>& pren){
     connect(this,SIGNAL(ButtonClicked()),this,SLOT(aggiungi_pren()));
 }
 
-void prenotazioni_view::addToView(prenotazione*){
-    //guarda dove row()-2 ecc...
+void prenotazioni_view::addToView(prenotazione* pr){
+    pren_table->insertRow(pren_table->rowCount()-1);
+    pren_table->setCellWidget(pren_table->rowCount()-2,0,new QLabel(QString::number(pr->getAula()->getNumero()),this));
+    pren_table->setCellWidget(pren_table->rowCount()-2,1,new QLabel(pr->getData().toString("dd-MM-yyyy"),this));
+    pren_table->setCellWidget(pren_table->rowCount()-2,2,new QLabel(pr->getOraArrivo().toString("hh-mm"),this));
+    pren_table->setCellWidget(pren_table->rowCount()-2,3,new QLabel(pr->getOraUscita().toString("hh-mm"),this));
+    pren_table->setCellWidget(pren_table->rowCount()-2,4,new QLabel(QString::fromStdString(pr->getCausale()),this));
+    pren_table->setCellWidget(pren_table->rowCount()-2,5,new QLabel(QString::fromStdString(pr->getPersona()->getEmail()),this));
+    QPushButton* remove=new QPushButton("-",this);
+    pren_table->setCellWidget(pren_table->rowCount()-2,7,remove);
+    connect(remove, &QPushButton::clicked,[this,remove](){
+        unsigned int riga = pren_table->indexAt(remove->pos()).row();
+        emit rimuovi_signal(riga);
+    });
 }
-
 
 void prenotazioni_view::aggiungi_pren(){
     QString aula = _aula->text();

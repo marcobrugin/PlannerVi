@@ -13,6 +13,7 @@
 #include <QDateEdit>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QRegularExpressionValidator>
 
 class prenotazioni_view : public View{
 private:
@@ -22,6 +23,7 @@ private:
     QHBoxLayout* hbox;
     QPushButton* aggiungi;
     QPushButton* indietro;
+    QRegularExpressionValidator* validator;
 
     QLineEdit* _aula;
     QDateEdit* _data;
@@ -46,7 +48,7 @@ public slots:
 signals:
     void indietro_signal() const;
     void aggiungi_signal(const QString&, const QDate&, const QTime&, const QTime&, const QString&, const QString&)const;
-
+    void rimuovi_signal(uint);
 };
 
 #endif // PRENOTAZIONI_VIEW_H
