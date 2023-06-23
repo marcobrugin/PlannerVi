@@ -2,9 +2,7 @@
 #define PRENOTAZIONI_CONTROLLER_H
 
 #include "controller.h"
-#include "menu_controller.h"
 #include "View/prenotazioni_view.h"
-#include "View/menu_view.h"
 #include "Model/storage.h"
 
 class PrenController : public Controller {
