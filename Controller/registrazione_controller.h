@@ -15,7 +15,7 @@ public:
     storage* getModel() const override;
     registrazione_view* getView() const override;
 public slots:
-    void Registr_enter(QString _nome, QString _cogn) const;
+    void Registr_enter(const QString& _nome, const QString& _cogn, const QString& _cod, const QString& _ph, const QString& _mail, const QString& _pass ) const;
     void onViewClosed() const override;
 };
 

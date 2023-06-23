@@ -11,6 +11,7 @@ View::View(const QSize& s, View* v): QWidget(v,Qt::Window){
 View::~View(){
     setParent(nullptr);
 }
+
 void View::showMessage(const QString& t,const QString& i)  {
     QMessageBox::information(this,t,i,QMessageBox::Ok);
 

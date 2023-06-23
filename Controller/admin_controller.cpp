@@ -7,6 +7,7 @@ AdminController::AdminController(storage* s, admin_view * a, Controller* c) : Co
     getView()->create_table({"Numero Aula","Data","Ora Arrivo", "Ora Uscita", "Causale", "Email utente"});
     getView()->visualizza_prenotazioni(s->getContPren());
     connect(view,SIGNAL(rimuovi_signal(i)),this,SLOT(rimuovi_enter(i)));
+    connect(view,SIGNAL(elimina_signal(i)),this,SLOT(rimuovi_enter(i)));
     connect(view,SIGNAL(aggiugi_signal(aula, data, oraArrivo, oraUscita, causale, mail)),this,SLOT(aggiungi_enter(aula, data, oraArrivo, oraUscita, causale, mail)));
 }
 storage* AdminController::getModel()const {

@@ -3,7 +3,7 @@
 MenuController::MenuController(storage* s, menu_view * m, Controller* c) : Controller(s, m, c){
     view->setTitolo("MENU");
     connect(view,SIGNAL(View_profilo_signal(mail)),this,SLOT(Profilo_enter(mail))); //modificare anche l'origine
-    connect(view,SIGNAL(View_my_signal()),this,SLOT(MyPren_enter()));
+    //connect(view,SIGNAL(View_my_signal()),this,SLOT(MyPren_enter()));
     connect(view,SIGNAL(View_tutte_signal()),this,SLOT(Pren_enter()));
 }
 
@@ -33,12 +33,13 @@ void MenuController::Profilo_enter(const QString& mail) const {
     newW->show();
     hide();
 }
-void MenuController::Pren_enter() const {
-    prenotazioni_view* newW =new prenotazioni_view(QSize(300,400), view);
+*/
+void MenuController::Pren_enter(const QString& mail) const {
+    prenotazioni_view* newW =new prenotazioni_view(QSize(300,400), mail, view);
     newW->show();
     hide();
 }
-*/
+
 void MenuController::onViewClosed() const {
     delete this;
 }

@@ -9,23 +9,25 @@ storage* RegController::getModel()const {
 registrazione_view* RegController::getView() const{
     return static_cast<registrazione_view*>(view) ;
 }
-/*
-void RegController::Registr_enter(string _nome, string _cogn ) const {
-    utente* nu= new utente (_nome, _cogn);
-    for (int var = 0; var < total; ++var) {
-        if()//controllo sulla mail
-    };
 
-
+void RegController::Registr_enter(const QString& _nome, const QString& _cogn, const QString& _cod, const QString& _ph, const QString& _mail, const QString& _pass ) const {
+    for (auto it : getModel()->getUtente()) {
+        //controllo sulla mail
+        if(it->getEmail()== (_mail).toStdString()){
+            view->showError("Errore", "Utente già esistente");
+            return;
+        }
+    }
+    utente* nu= new utente(_nome.toStdString(), _cogn.toStdString(), _cod.toStdString(), _ph.toStdString(), _mail.toStdString(), _pass.toStdString());
     getModel()->addUtente(nu);
-    //CLICCANDO SU REGISTRA deve inserire gli argomenti passati nel vettore<utenti> pers in storage
-    // + controllare che la mail non sia già presente (utente già esistente)
 
-    // e aprire la scheda di login
-    login_view* logW =new login_view(QSize(300,400), view);
-    logW->show();
-    hide();
-}*/
+    // e tornare alla scheda di login
+    if(view->parent()){
+        static_cast<View*>(view->parent())->show();
+        hide();
+        delete this;
+    }
+}
 
 void RegController::onViewClosed() const {
     delete this;

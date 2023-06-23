@@ -81,10 +81,9 @@ registrazione_view::registrazione_view(const QSize & s, View * parent) : View(s,
     QPushButton *registerButton = new QPushButton("Registrati", this);
     layout->addWidget(registerButton);
 
-  // Connessione del pulsante di registrazione al slot onRegisterButtonClicked()
+  // Connessione del pulsante di registrazione al slot onRegisterButtonClicked
     connect(registerButton,SIGNAL(clicked(bool)),this,SIGNAL(RegClicked()));
     connect(this,SIGNAL(ButtonClicked()),this,SLOT(onRegisterButtonClicked()));
-    //connect(registerButton, &QPushButton::clicked, this, &registrazione_view::onRegisterButtonClicked);
 }
 
 void registrazione_view::onRegisterButtonClicked()

@@ -4,6 +4,7 @@
 #include "controller.h"
 #include "View/menu_view.h"
 #include "View/profilo_view.h"
+#include "View/prenotazioni_view.h"
 #include "Model/storage.h"
 
 class MenuController : public Controller {
@@ -18,8 +19,8 @@ public:
     menu_view* getView() const override;
 public slots:
     void Profilo_enter(const QString&) const;
-    void MyPren_enter() const;
-    void Pren_enter() const;
+    //void MyPren_enter() const;
+    void Pren_enter(const QString&) const;
     void onViewClosed() const override;
 };
 

@@ -18,7 +18,6 @@ private:
 public:
     utente(string _nome="", string _cognome="", string _codiceFiscale="", string _telefono="", string _email="", string _ruolo="Studente", string _pw="xyz");
     virtual ~utente() = default;
-    virtual utente* clone() const = 0;
 
     string getNome() const;
     void setNome(const string &value);

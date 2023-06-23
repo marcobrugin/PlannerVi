@@ -2,7 +2,7 @@
 
 prenotazioni_view::prenotazioni_view(){}
 
-prenotazioni_view::prenotazioni_view(const QSize& s, QString& m, View* parent) : View(s, parent), mail(m), pren_table(new QTableWidget(this)) {
+prenotazioni_view::prenotazioni_view(const QSize& s, const QString& m, View* parent) : View(s, parent), mail(m), pren_table(new QTableWidget(this)) {
     vbox=new QVBoxLayout(this);
     hbox=new QHBoxLayout(this);
     QLabel* titolo=new QLabel("VISUALIZZAZIONE PRENOTAZIONI ", this);
@@ -102,6 +102,7 @@ void prenotazioni_view::aggiungi_pren(){
     QTime oraArrivo= _oraArrivo->time();
     QTime oraUscita= _oraArrivo->time();
     QString causale= _causale->toPlainText();
+    QString mail= _mail->text();
 
     //controllo errori basilari
     if(aula!=NULL || data.isNull() || oraArrivo.isNull() || oraUscita.isNull() || causale.isEmpty() || causale.isNull()){
@@ -114,9 +115,9 @@ void prenotazioni_view::aggiungi_pren(){
 
 void prenotazioni_view::closeEvent(QCloseEvent *event){
     if(QMessageBox::question(this,"Uscita","Vuoi uscire davvero?",QMessageBox::Yes|QMessageBox::No)==QMessageBox::Yes){
-    event->accept();
-    emit viewClosed();
-}
-else
-    event->ignore();
+        event->accept();
+        emit viewClosed();
+    }
+    else
+        event->ignore();
 }

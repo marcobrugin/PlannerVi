@@ -16,6 +16,7 @@
 #include <QRegularExpressionValidator>
 
 class prenotazioni_view : public View{
+    Q_OBJECT
 private:
     QString mail;
     QTableWidget* pren_table;
@@ -35,7 +36,7 @@ private:
 protected:
     explicit prenotazioni_view();
 public:
-    explicit prenotazioni_view(const QSize& s, QString& m, View *parent = nullptr);
+    explicit prenotazioni_view(const QSize& s, const QString& m, View *parent = nullptr);
     void closeEvent(QCloseEvent *event) override;
 
     void create_table(const QStringList&);
@@ -46,6 +47,7 @@ public slots:
     void aggiungi_pren();
 
 signals:
+    void ButtonClicked() const;
     void indietro_signal() const;
     void aggiungi_signal(const int&, const QDate&, const QTime&, const QTime&, const QString&, const QString&);
     void rimuovi_signal(uint);

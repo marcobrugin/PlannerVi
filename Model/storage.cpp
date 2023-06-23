@@ -70,3 +70,7 @@ void storage::removePrenotazione(uint i) {
     prenotazioni.remove(i);
 }
 
+void storage::addUtente(utente* ut){
+    pers.push_back(ut);
+}
+

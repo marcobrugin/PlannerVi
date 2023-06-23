@@ -16,7 +16,7 @@ public:
     storage* getModel() const override;
     prenotazioni_view* getView() const override;
 public slots:
-    void aggiungi_enter(const int&, const QDate&, const QTime&, const QTime&, const QString&, const QString&) const;
+    void aggiungi_enter(const int&, const QDate&, const QTime&, const QTime&, const QString&, const QString&)const;
     void indietro_enter() const;
     void rimuovi_enter(uint i);
     void onViewClosed() const override;
