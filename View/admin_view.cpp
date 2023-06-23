@@ -25,15 +25,14 @@ void admin_view::visualizza_prenotazioni(const contenitore<prenotazione*>& pren)
     int i=0;
     for(auto j: pren){
         pren_table->insertRow(i);
-        QLabel* aulaLabel = new QLabel(j->getNumero, this); //dell'aula mi serve solo il numero
-        pren_table->setCellWidget(i, 0, aulaLabel);
-        QLabel* dataLabel = new QLabel(j->getData(), this);
+        QLabel* aulaLabel = new QLabel(QString::number(j->getAula()->getNumero()), this);         pren_table->setCellWidget(i, 0, aulaLabel);
+        QLabel* dataLabel = new QLabel((j->getData()).toString(), this);
         pren_table->setCellWidget(i, 1, dataLabel);
 
 
         rimuovi = new QPushButton("-",this);
         pren_table->setCellWidget(i, 6, rimuovi);
-        connect (rimuovi, &QPushButton::clicked,[this, rimuovi](){
+        connect (rimuovi, &QPushButton::clicked,[this, remove](){
             unsigned int riga = pren_table->indexAt(rimuovi->pos()).row();
             emit rimuovi_prenotazione(riga);
         });
@@ -50,6 +49,8 @@ void admin_view::visualizza_prenotazioni(const contenitore<prenotazione*>& pren)
 
     pren_table->insertRow(i);
     _aula = new QLineEdit(this);
+    validator = new QRegularExpressionValidator(QRegularExpression("[0-9]+"), _aula);
+    _aula->setValidator(validator);
     pren_table->setCellWidget(i,0,_aula);
     _data = new QDateEdit(this);
     _data->setCalendarPopup(true); // Abilita il calendario a comparsa
@@ -78,7 +79,7 @@ void admin_view::visualizza_prenotazioni(const contenitore<prenotazione*>& pren)
 
 
 void admin_view::aggiungi_pren(){
-    QString aula = _aula->text();
+    int aula = (_aula->text()).toInt();
     QDate data = _data->date();
     QTime oraArrivo= _oraArrivo->time();
     QTime oraUscita= _oraArrivo->time();
@@ -86,7 +87,7 @@ void admin_view::aggiungi_pren(){
     QString mail= _mail->toPlainText();
 
     //controllo errori basilari
-    if(aula.isNull() || aula.isEmpty() || data.isNull() || oraArrivo.isNull() || oraUscita.isNull() || causale.isEmpty() || causale.isNull()){
+    if(aula!=NULL || data.isNull() || oraArrivo.isNull() || oraUscita.isNull() || causale.isEmpty() || causale.isNull()){
         static_cast<View*>(this)->showError("Inserimento non valido", "I valori inseriti non sono accettati");
     }
     else{

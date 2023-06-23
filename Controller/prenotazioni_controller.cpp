@@ -4,7 +4,7 @@ PrenController::PrenController(storage* s, prenotazioni_view * p, Controller* c)
     //collegamento segnale di aggiunta allo slot di aggiunta
     connect(view,SIGNAL(aggiugi_signal(aula, data, oraArrivo, oraUscita, causale, mail)),this,SLOT(aggiungi_enter(aula, data, oraArrivo, oraUscita, causale, mail)));
     view->setTitolo("SCHEDA PRENOTAZIONI");
-    getView()->create_table({"inserire i vari headers","ciao"});//DA FARE
+    getView()->create_table({"Numero Aula","Data","Ora Arrivo", "Ora Uscita", "Causale", "Email utente"});
     getView()->carica_pren(s->getContPren());
 }
 
@@ -20,15 +20,23 @@ void PrenController::onViewClosed() const {
     delete this;
 }
 
-void PrenController::aggiungi_enter(const QString& aula, const QDate& data, const QTime& oraArrivo, const QTime& oraUscita, const QString& causale, const QString& mail) const {
-    //getModel()->getContPren();
+void PrenController::aggiungi_enter(const int& aula, const QDate& data, const QTime& oraArrivo, const QTime& oraUscita, const QString& causale, const QString& mail) const {
+    string _causale=causale.toStdString();
+    string _mail=mail.toStdString();
+    utente* ut;
     for(auto i : getModel()->getContPren()){
-        if(i->getAula()==aula || ){ //  CONVERTIRE e fare tutti i controlli
-            view->showError("","");
+        if(i->getAula()->getNumero() == aula && i->getData()==data ){
+            QTime arrivo= i->getOraArrivo();
+            QTime uscita= i->getOraUscita();
+            if((oraArrivo>=arrivo && oraArrivo<uscita) || (oraUscita>arrivo && oraUscita<=uscita) || (oraArrivo<= arrivo && oraUscita>=uscita)){
+                view->showError("Prenotazione errata","L'aula è già occupata nell'ora/data selezionata");
+            }
             return;
         }
+        ut=i->getPersona();
     }
-    prenotazione* nuova = new prenotazione(aula,data);//con le conversioni adeguate!
+    //mettere in ordine ed estrapolare l'utente* dalla mail
+    prenotazione* nuova = new prenotazione(aula,data,oraArrivo,oraUscita,causale.toStdString(),ut);//con le conversioni adeguate!
     getModel()->addPrenotazione(nuova);
     getView()->addToView(nuova);
 }

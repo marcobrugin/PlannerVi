@@ -13,6 +13,7 @@
 #include <QDateEdit>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QRegularExpressionValidator>
 
 class admin_view: public View {
     Q_OBJECT
@@ -24,6 +25,7 @@ private:
     QPushButton* rimuovi;
     QPushButton* indietro;
 
+    QRegularExpressionValidator* validator;
     QLineEdit* _aula;
     QDateEdit* _data;
     QTimeEdit* _oraArrivo;
@@ -46,6 +48,7 @@ public slots:
     void aggiungi_pren();
 
 signals:
+    void aggiungi_signal(int aula, QDate data, QTime oraArrivo, QTime oraUscita, QString causale, QString mail);
     void rimuovi_signal(uint);
 };
 
