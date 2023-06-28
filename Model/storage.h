@@ -19,8 +19,9 @@ private:
     contenitore<prenotazione*> prenotazioni;
     vector<utente*> pers;
 protected:
-    explicit storage();
+    //qui ci va il costruttore esplicito
 public:
+    explicit storage();
     storage(contenitore<aula*>& , contenitore<prenotazione*>& , vector<utente*>& );//costr
     virtual ~storage();//distr
 

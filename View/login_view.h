@@ -26,7 +26,7 @@ private:
     QLineEdit *emailLineEdit;
     QLineEdit *passwordLineEdit;
     QPushButton *loginButton;
-    QLabel *registerLabel;
+    QPushButton *registerLabel;
 
 protected:
     explicit login_view();

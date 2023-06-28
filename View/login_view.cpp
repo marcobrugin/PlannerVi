@@ -37,6 +37,7 @@ login_view::login_view(const QSize& s, View* parent) : View(s, parent) {
     Vl2->addWidget(emailLineEdit);
     passwordLineEdit = new QLineEdit(this);
     passwordLineEdit->setPlaceholderText("inserire password");
+    passwordLineEdit->setEchoMode(QLineEdit::Password);
     Vl2->addWidget(passwordLineEdit);
     HLayout->addLayout(Vl2);
 
@@ -49,14 +50,16 @@ login_view::login_view(const QSize& s, View* parent) : View(s, parent) {
     connect(this,SIGNAL(ButtonClicked()),this,SLOT(onLoginButtonClicked()));
 
     // Aggiungi link per la registrazione
-    registerLabel = new QLabel(this);
+    /*registerLabel = new QLabel(this);
     registerLabel->setText("<a href='register'>Non sei registrato? Registrati</a>");
     registerLabel->setAlignment(Qt::AlignRight);
     registerLabel->setTextFormat(Qt::RichText);
     registerLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
     registerLabel->setOpenExternalLinks(true);
     layout->addWidget(registerLabel);
-
+*/
+    registerLabel= new QPushButton("Registrati",this);
+    layout->addWidget(registerLabel);
     connect(registerLabel,SIGNAL(clicked(bool)),this,SIGNAL(Label_signal()));
 
     setLayout(layout) ;
