@@ -50,18 +50,16 @@ login_view::login_view(const QSize& s, View* parent) : View(s, parent) {
     connect(this,SIGNAL(ButtonClicked()),this,SLOT(onLoginButtonClicked()));
 
     // Aggiungi link per la registrazione
-    /*registerLabel = new QLabel(this);
+    registerLabel = new QLabel(this);
     registerLabel->setText("<a href='register'>Non sei registrato? Registrati</a>");
     registerLabel->setAlignment(Qt::AlignRight);
     registerLabel->setTextFormat(Qt::RichText);
     registerLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
-    registerLabel->setOpenExternalLinks(true);
+    registerLabel->setOpenExternalLinks(false);
     layout->addWidget(registerLabel);
-*/
-    registerLabel= new QPushButton("Registrati",this);
-    layout->addWidget(registerLabel);
-    connect(registerLabel,SIGNAL(clicked(bool)),this,SIGNAL(Label_signal()));
 
+    // Connessione del segnale linkActivated all'evento onRegisterClicked
+    connect(registerLabel, SIGNAL(linkActivated(QString)), this, SIGNAL(Register_signal()));
     setLayout(layout) ;
 }
 

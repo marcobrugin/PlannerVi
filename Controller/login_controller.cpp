@@ -3,7 +3,7 @@
 LoginController::LoginController(storage* s, login_view * l, Controller* c) : Controller(s, l, c){
     view->setTitolo("SCHEDA DI LOGIN");
     connect(view,SIGNAL(Login_signal(em, pass)),this,SLOT(Login_enter(em, pass)));
-    connect(view,SIGNAL(Label_signal()),this,SLOT(Label_enter()));
+    connect(view,SIGNAL(Register_signal()),this,SLOT(Register_enter()));
 }
  storage* LoginController::getModel()const {
     return static_cast<storage*>(mod);
@@ -48,7 +48,7 @@ void LoginController::Login_enter(const string& em, const string& pass) const {
     }
 }
 
-void LoginController::Label_enter() const {
+void LoginController::Register_enter() const {
     registrazione_view* regW =new registrazione_view(QSize(300,400), view);
     regW->show();
     RegController* regC = new RegController(getModel() , regW , const_cast<LoginController*>(this));

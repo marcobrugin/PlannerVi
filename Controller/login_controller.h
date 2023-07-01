@@ -21,7 +21,7 @@ public:
     login_view* getView() const override;
 public slots:
     void Login_enter(const string& em, const string& pass) const;
-    void Label_enter() const;
+    void Register_enter() const;
     void onViewClosed() const override;
 };
 

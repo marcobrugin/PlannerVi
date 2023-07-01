@@ -26,7 +26,7 @@ private:
     QLineEdit *emailLineEdit;
     QLineEdit *passwordLineEdit;
     QPushButton *loginButton;
-    QPushButton *registerLabel;
+    QLabel *registerLabel;
 
 protected:
     explicit login_view();
@@ -41,7 +41,7 @@ public slots:
 signals:
     void ButtonClicked() const;
     void Login_signal(const QString& e, const QString& p) const;
-    void Label_signal() const;
+    void Register_signal() const;
 };
 
 #endif // LOGIN_VIEW_H
