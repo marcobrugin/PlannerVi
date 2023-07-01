@@ -20,7 +20,6 @@ class admin_view: public View {
 private:
     QTableWidget* pren_table;
     QVBoxLayout* vbox;
-    QHBoxLayout* hbox;
     QPushButton* aggiungi;
     QPushButton* indietro;
 

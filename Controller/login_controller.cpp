@@ -2,7 +2,7 @@
 
 LoginController::LoginController(storage* s, login_view * l, Controller* c) : Controller(s, l, c){
     view->setTitolo("SCHEDA DI LOGIN");
-    connect(view,SIGNAL(Login_signal(em, pass)),this,SLOT(Login_enter(em, pass)));
+    connect(view,SIGNAL(Login_signal(string, string)),this,SLOT(Login_enter(string, string)));
     connect(view,SIGNAL(Register_signal()),this,SLOT(Register_enter()));
 }
  storage* LoginController::getModel()const {
@@ -25,14 +25,12 @@ void LoginController::Login_enter(const string& em, const string& pass) const {
                 //CONTROLLO SUL UTENTE VS ADMIN PER LA VISUALIZZAZIONE DELLA RELATIVA SCHEDA
                 if(it->getEmail()=="admin"){
                     admin_view* aW = new admin_view(QSize(300,400), view);
-                    aW->show();
                     AdminController* aC = new AdminController(getModel() , aW , const_cast<LoginController*>(this));
                     aC->show();
                     hide();
                 }
                 else{
                 menu_view* menuW = new menu_view(QSize(300,400), QString::fromStdString(em), view); //posso passargli pure la mail dell'utente?
-                menuW->show();
                 MenuController* menuC = new MenuController(getModel() , menuW , const_cast<LoginController*>(this));
                 menuC->show();
                 hide();
@@ -50,7 +48,6 @@ void LoginController::Login_enter(const string& em, const string& pass) const {
 
 void LoginController::Register_enter() const {
     registrazione_view* regW =new registrazione_view(QSize(300,400), view);
-    regW->show();
     RegController* regC = new RegController(getModel() , regW , const_cast<LoginController*>(this));
     regC->show();
     hide();

@@ -2,14 +2,8 @@
 
 admin_view::admin_view(const QSize& s, View* parent) : View(s, parent){
     vbox=new QVBoxLayout(this);
-    hbox=new QHBoxLayout(this);
     QLabel* titolo=new QLabel("GESTIONE PRENOTAZIONI ", this);
-    hbox->addWidget(titolo);
-    indietro = new QPushButton("Torna al menu", this);
-    hbox->addWidget(indietro);
-
-    vbox->addLayout(hbox);
-    connect(indietro,SIGNAL(clicked(bool)),this,SIGNAL(indietro_signal()));
+    vbox->addWidget(titolo);
 }
 
 void admin_view::create_table(const QStringList& intestazioni){

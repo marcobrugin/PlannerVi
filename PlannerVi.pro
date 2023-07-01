@@ -67,7 +67,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    Images/logo_consvi.jpeg \
     Images/logo_consvi.svg \
-    View/Images/logo_consvi.jpeg
-

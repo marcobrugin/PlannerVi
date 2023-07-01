@@ -40,7 +40,7 @@ public slots:
 
 signals:
     void ButtonClicked() const;
-    void Login_signal(const QString& e, const QString& p) const;
+    void Login_signal(const string& e, const string& p) const;
     void Register_signal() const;
 };
 

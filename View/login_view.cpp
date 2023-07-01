@@ -1,15 +1,19 @@
 #include "login_view.h"
+#include <QDebug>
 
 login_view::login_view(const QSize& s, View* parent) : View(s, parent) {
 
     layout = new QVBoxLayout(this);
 
     // Aggiungi il logo
-    QPixmap logo(":/Images/logo_consvi.svg");
+    QPixmap* logo = new QPixmap(":/Images/logo_consvi.svg");
     logoLabel=new QLabel(this);
-    logoLabel->setPixmap(logo.scaledToHeight(256));
+    logoLabel->setPixmap(logo->scaledToHeight(256));
     logoLabel->setAlignment(Qt::AlignHCenter);
     layout->addWidget(logoLabel);
+
+    QString logoFilePath = ":/Images/logo_consvi.svg";
+    qDebug() << "Logo file path: " << logoFilePath;
 
     benvenutoLabel = new QLabel(this);
     //benvenutoLabel->setLayoutDirection(Qt::LeftToRight);
@@ -60,18 +64,19 @@ login_view::login_view(const QSize& s, View* parent) : View(s, parent) {
 
     // Connessione del segnale linkActivated all'evento onRegisterClicked
     connect(registerLabel, SIGNAL(linkActivated(QString)), this, SIGNAL(Register_signal()));
+
     setLayout(layout) ;
 }
 
 void login_view::onLoginButtonClicked(){
     //controlli base, gli altri vanno fatti sul login_controller
-    QString email = emailLineEdit->text();
-    QString password = passwordLineEdit->text();
+    const QString email = emailLineEdit->text();
+    const QString password = passwordLineEdit->text();
 
     if(email.isEmpty() || password.isEmpty()){
         static_cast<View*>(this)->showError("Inserimento errato", "Il valore inserito non è permesso");
     } else {
-        emit Login_signal(email, password);
+        emit Login_signal(email.toStdString(), password.toStdString());
     }
 }
 
