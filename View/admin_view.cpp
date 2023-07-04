@@ -1,13 +1,20 @@
 #include "admin_view.h"
 
-admin_view::admin_view(const QSize& s, View* parent) : View(s, parent){
+admin_view::admin_view(const QSize& s, View* parent) : View(s, parent), pren_table (new QTableWidget(this)){
     vbox=new QVBoxLayout(this);
+
+    QFont font;
+    font.setBold(true);
+    font.setPointSize(14);
+
     QLabel* titolo=new QLabel("GESTIONE PRENOTAZIONI ", this);
+    titolo->setFont(font);
+    titolo->setAlignment(Qt::AlignHCenter);
     vbox->addWidget(titolo);
 }
 
 void admin_view::create_table(const QStringList& intestazioni){
-    pren_table->setColumnCount(7);
+    pren_table->setColumnCount(8);
     pren_table->setHorizontalHeaderLabels(intestazioni);
     pren_table->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     pren_table->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -69,6 +76,8 @@ void admin_view::visualizza_prenotazioni(const contenitore<prenotazione*>& pren)
     pren_table->setCellWidget(i,4,_causale);
     _mail = new QTextEdit(this);
     pren_table->setCellWidget(i,5,_mail);
+    QLabel* rimuovi = new QLabel(" non rimovibile",this);
+    pren_table->setCellWidget(i, 6, rimuovi);
 
     aggiungi = new QPushButton ("+", this);
     pren_table->setCellWidget(i,7,aggiungi);

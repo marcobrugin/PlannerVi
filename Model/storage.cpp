@@ -1,6 +1,11 @@
 #include "storage.h"
+#include "contenitore.h"
 
-storage::storage(){}
+storage::storage(){
+    aule=contenitore<aula*>();
+    prenotazioni=contenitore<prenotazione*>();
+}
+
 const contenitore<aula*>& storage::getContAula() const{
     return aule;
 }

@@ -3,8 +3,8 @@
 
 #include "controller.h"
 #include "View/menu_view.h"
-#include "View/profilo_view.h"
-#include "View/prenotazioni_view.h"
+#include "Controller/profilo_controller.h"
+#include "Controller/prenotazioni_controller.h"
 #include "Model/storage.h"
 
 class MenuController : public Controller {

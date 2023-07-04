@@ -1,12 +1,14 @@
 #include "prenotazioni_view.h"
 
 prenotazioni_view::prenotazioni_view(){}
+QString prenotazioni_view::getMail() const { return mail; }
 
 prenotazioni_view::prenotazioni_view(const QSize& s, const QString& m, View* parent) : View(s, parent), mail(m), pren_table(new QTableWidget(this)) {
     vbox=new QVBoxLayout(this);
     hbox=new QHBoxLayout(this);
     QLabel* titolo=new QLabel("VISUALIZZAZIONE PRENOTAZIONI ", this);
     hbox->addWidget(titolo);
+    hbox->addStretch();
     indietro = new QPushButton("Torna al menu", this);
     hbox->addWidget(indietro);
 
@@ -69,7 +71,7 @@ void prenotazioni_view::carica_pren(const contenitore<prenotazione*>& pren){
     pren_table->setCellWidget(i,3,_oraUscita);
     _causale = new QTextEdit(this);
     pren_table->setCellWidget(i,4,_causale);
-    _mail = new QLabel(mail, this);
+    _mail = new QLabel(this->getMail(), this);
     pren_table->setCellWidget(i,5,_mail);
 
     aggiungi = new QPushButton ("+", this);

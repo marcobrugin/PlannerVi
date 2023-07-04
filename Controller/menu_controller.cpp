@@ -2,7 +2,7 @@
 
 MenuController::MenuController(storage* s, menu_view * m, Controller* c) : Controller(s, m, c){
     view->setTitolo("MENU");
-    connect(view,SIGNAL(View_profilo_signal(mail)),this,SLOT(Profilo_enter(mail))); //modificare anche l'origine
+    connect(view,SIGNAL(View_profilo_signal(const QString&)),this,SLOT(Profilo_enter(const QString&)));
     //connect(view,SIGNAL(View_my_signal()),this,SLOT(MyPren_enter()));
     connect(view,SIGNAL(View_tutte_signal()),this,SLOT(Pren_enter()));
 }
@@ -25,7 +25,8 @@ void MenuController::Profilo_enter(const QString& mail) const {
         }
     }
     profilo_view* newW =new profilo_view(QSize(300,400), persona, view);
-    newW->show();
+    ProfiloController* pC= new ProfiloController(getModel(), newW, const_cast<MenuController*>(this));
+    pC->show();
     hide();
 }
 /*void MenuController::MyPren_enter() const {
@@ -35,8 +36,9 @@ void MenuController::Profilo_enter(const QString& mail) const {
 }
 */
 void MenuController::Pren_enter(const QString& mail) const {
-    prenotazioni_view* newW =new prenotazioni_view(QSize(300,400), mail, view);
-    newW->show();
+    prenotazioni_view* prW =new prenotazioni_view(QSize(300,400), mail, view);
+    PrenController* pC= new PrenController(getModel(), prW, const_cast<MenuController*>(this));
+    pC->show();
     hide();
 }
 

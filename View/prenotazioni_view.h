@@ -38,6 +38,7 @@ protected:
 public:
     explicit prenotazioni_view(const QSize& s, const QString& m, View *parent = nullptr);
     void closeEvent(QCloseEvent *event) override;
+    QString getMail() const;
 
     void create_table(const QStringList&);
     void carica_pren(const contenitore<prenotazione*>& );

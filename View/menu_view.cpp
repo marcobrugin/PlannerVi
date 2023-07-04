@@ -11,25 +11,32 @@ menu_view::menu_view(const QSize & s, const QString& m, View * parent) : View(s,
     logoLabel->setAlignment(Qt::AlignHCenter);
     vbox->addWidget(logoLabel);
 
+    QFont font;
+    font.setBold(true);
+    font.setPointSize(14);
+
     benvenuto = new QLabel("Benvenuto!", this);
     benvenuto->setAlignment(Qt::AlignCenter);
+    benvenuto->setFont(font);
     vbox->addWidget(benvenuto);
     QLabel* ut = new QLabel ("Accesso effettuato come "+m, this);
+    ut->setAlignment(Qt::AlignCenter);
     vbox->addWidget(ut);
-    vbox->addStretch();
 
-    viewProfilo= new QPushButton("Visualizza Profilo", this);
+    QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    viewProfilo= new QPushButton("Visualizza profilo utente", this);
+    viewProfilo->setSizePolicy(sizePolicy);
     vbox->addWidget(viewProfilo);
-    vbox->addStretch();
     viewMyPren= new QPushButton("Visualizza le mie prenotazioni", this);
+    viewMyPren->setSizePolicy(sizePolicy);
     vbox->addWidget(viewMyPren);
-    vbox->addStretch();
-    viewTuttePren= new QPushButton("Visualizza tutte prenotazioni", this);
+    viewTuttePren= new QPushButton("Visualizza tutte le prenotazioni", this);
+    viewTuttePren->setSizePolicy(sizePolicy);
     vbox->addWidget(viewTuttePren);
 
     // Connessione dei pulsanti ai segnali
     connect(viewProfilo,SIGNAL(clicked(bool)),this,SIGNAL(View_profilo_signal(m)));
-    connect(viewMyPren,SIGNAL(clicked(bool)),this,SIGNAL(View_my_signal(m)));
+    //connect(viewMyPren,SIGNAL(clicked(bool)),this,SIGNAL(View_my_signal(m)));
     connect(viewTuttePren,SIGNAL(clicked(bool)),this,SIGNAL(View_tutte_signal(m)));
 }
 
