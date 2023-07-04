@@ -33,8 +33,12 @@ public:
 
 signals:
     void View_profilo_signal(QString&) const;
-    //void View_my_signal(const QString&) const;
+    void View_my_signal(const QString&) const;
     void View_tutte_signal(const QString&) const;
+public slots:
+    void p1() const;
+    void p2() const;
+    void p3() const;
 };
 
 #endif // MENU_VIEW_H
