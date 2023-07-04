@@ -40,11 +40,19 @@ menu_view::menu_view(const QSize & s, const QString& m, View * parent) : View(s,
     QString ml= this->getMail();
 
     // Connessione dei pulsanti ai segnali
-    connect(viewProfilo,SIGNAL(clicked(bool)),this,SIGNAL(View_profilo_signal(ml)));
-    //connect(viewMyPren,SIGNAL(clicked(bool)),this,SIGNAL(View_my_signal(m)));
-    connect(viewTuttePren,SIGNAL(clicked(bool)),this,SIGNAL(View_tutte_signal(ml)));
+    connect(viewProfilo,SIGNAL(clicked(bool)),this,SLOT(p3()));
+    connect(viewMyPren,SIGNAL(clicked(bool)),this,SLOT(p2()));
+    connect(viewTuttePren,SIGNAL(clicked(bool)),this,SLOT(p1()));
 }
-
+void menu_view::p1() const{
+    emit View_tutte_signal(this->getMail());
+}
+void menu_view::p2() const{
+    emit View_my_signal(this->getMail());
+}
+void  menu_view::p3() const{
+    emit View_my_signal(this->getMail());
+}
 void menu_view::closeEvent(QCloseEvent *event){
     if(QMessageBox::question(this,"Uscita","Vuoi uscire davvero?",QMessageBox::Yes|QMessageBox::No)==QMessageBox::Yes){
         event->accept();
