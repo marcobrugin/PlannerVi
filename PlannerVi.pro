@@ -18,6 +18,7 @@ SOURCES += \
     Controller/prenotazioni_controller.cpp \
     Controller/profilo_controller.cpp \
     Controller/registrazione_controller.cpp \
+    Controller/salvataggio_dati.cpp \
     Model/aula.cpp \
     Model/aulaConcerto.cpp \
     Model/aulaStrumentale.cpp \
@@ -43,6 +44,7 @@ HEADERS += \
     Controller/prenotazioni_controller.h \
     Controller/profilo_controller.h \
     Controller/registrazione_controller.h \
+    Controller/salvataggio_dati.h \
     Model/aula.h \
     Model/aulaConcerto.h \
     Model/aulaStrumentale.h \
@@ -67,4 +69,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    logo_consvi.ico \
     Images/logo_consvi.svg \

@@ -1,5 +1,8 @@
 #include "menu_view.h"
 
+menu_view::menu_view(){}
+QString menu_view::getMail() const { return mail; }
+
 menu_view::menu_view(const QSize & s, const QString& m, View * parent) : View(s,parent), mail(m) {
 
     vbox = new QVBoxLayout(this);
@@ -34,10 +37,12 @@ menu_view::menu_view(const QSize & s, const QString& m, View * parent) : View(s,
     viewTuttePren->setSizePolicy(sizePolicy);
     vbox->addWidget(viewTuttePren);
 
+    QString ml= this->getMail();
+
     // Connessione dei pulsanti ai segnali
-    connect(viewProfilo,SIGNAL(clicked(bool)),this,SIGNAL(View_profilo_signal(m)));
+    connect(viewProfilo,SIGNAL(clicked(bool)),this,SIGNAL(View_profilo_signal(ml)));
     //connect(viewMyPren,SIGNAL(clicked(bool)),this,SIGNAL(View_my_signal(m)));
-    connect(viewTuttePren,SIGNAL(clicked(bool)),this,SIGNAL(View_tutte_signal(m)));
+    connect(viewTuttePren,SIGNAL(clicked(bool)),this,SIGNAL(View_tutte_signal(ml)));
 }
 
 void menu_view::closeEvent(QCloseEvent *event){

@@ -6,17 +6,19 @@ login_view::login_view(const QSize& s, View* parent) : View(s, parent) {
     layout = new QVBoxLayout(this);
 
     // Aggiungi il logo
-    QPixmap* logo = new QPixmap(":/Images/logo_consvi.svg");
-    logoLabel=new QLabel(this);
-    logoLabel->setPixmap(logo->scaledToHeight(256));
+    logoLabel = new QLabel(this);
+    logoLabel->setPixmap(QIcon(":/logo_consvi.ico").pixmap(256));
     logoLabel->setAlignment(Qt::AlignHCenter);
     layout->addWidget(logoLabel);
 
-    QString logoFilePath = ":/Images/logo_consvi.svg";
-    qDebug() << "Logo file path: " << logoFilePath;
+    QPixmap logoPixmap("logo_consvi.ico");
+    logoLabel = new QLabel(this);
+    logoLabel->setPixmap(logoPixmap.scaledToHeight(256));
+    logoLabel->setAlignment(Qt::AlignHCenter);
+    layout->addWidget(logoLabel);
+
 
     benvenutoLabel = new QLabel(this);
-    //benvenutoLabel->setLayoutDirection(Qt::LeftToRight);
     benvenutoLabel->setText("Benvenuto!");
     benvenutoLabel->setAlignment(Qt::AlignCenter);
     layout->addWidget(benvenutoLabel);

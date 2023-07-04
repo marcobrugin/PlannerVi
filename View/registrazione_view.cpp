@@ -52,6 +52,8 @@ registrazione_view::registrazione_view(const QSize & s, View * parent) : View(s,
     codLineEdit->setPlaceholderText("Inserire codice fiscale");
     phoneLineEdit = new QLineEdit(this);
     phoneLineEdit->setPlaceholderText("Inserire numero di telefono");
+    QIntValidator *validator = new QIntValidator(this);
+    phoneLineEdit->setValidator(validator);
     emailLineEdit = new QLineEdit(this);
     emailLineEdit->setPlaceholderText("Inserire email");
 
@@ -101,21 +103,38 @@ void registrazione_view::onRegisterButtonClicked()
     // Controllo campi vuoti
     if (nome.isEmpty() || cognome.isEmpty() || cod_fiscale.isEmpty() || phone.isEmpty() ||
         email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-        QMessageBox::warning(this, "Errore di registrazione", "Riempi tutti i campi.");
+        QMessageBox::warning(this, "Errore di registrazione", "Riempire tutti i campi.");
         return;
     }
     else{
-        if (password != confirmPassword) {
-            QMessageBox::warning(this, "Errore di registrazione", "Le password non corrispondono.");
-            return;
+        bool hasUppercase = false;
+        bool hasNumber = false;
+        int length = password.length();
+
+        for (QChar character : password) {
+            if (character.isUpper())
+                hasUppercase = true;
+            else if (character.isDigit())
+                hasNumber = true;
+        }
+
+        if (hasUppercase && hasNumber && length >= 6){
+            if (password != confirmPassword) {
+                this->showError("Errore di registrazione", "Le password non corrispondono.");
+                return;
+            }
+            else{
+                emit Utente_add_signal(nome, cognome, cod_fiscale, phone, email, ruolo, password);
+            }
         }
         else{
-            emit Utente_add_signal(nome, cognome, cod_fiscale, phone, email, ruolo, password);
+            this->showError("Password non valida", "La password deve essere almeno di 6 caratteri, contenere almeno un numero e un carattere Maiuscolo");
+            return;
         }
     }
 
     QMessageBox::information(this, "Registrazione completata", "Registrazione avvenuta con successo!");
-    close();
+    //close();
 }
 
 void registrazione_view::closeEvent(QCloseEvent *event){
