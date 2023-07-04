@@ -18,9 +18,9 @@ int main(int argc, char *argv[])
     a.setWindowIcon(QIcon("logo.ico"));
     storage* st=new storage();
 
-    menu_view* mW = new menu_view (QSize(900,600),nullptr);
-    MenuController* mC= new MenuController (st, mW, nullptr);
-    mC->show();
+    login_view* login = new login_view(QSize(500,300),nullptr);
+    LoginController* log_controller= new LoginController (st, login);
+    log_controller->show();
 
     /*
     admin_view* aW = new admin_view (QSize(900,600),nullptr);

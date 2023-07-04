@@ -7,13 +7,6 @@ menu_view::menu_view(const QSize & s, const QString& m, View * parent) : View(s,
 
     vbox = new QVBoxLayout(this);
 
-    //logo
-    QPixmap logo(":/Images/logo_consvi.svg");
-    logoLabel=new QLabel(this);
-    logoLabel->setPixmap(logo.scaledToHeight(256));
-    logoLabel->setAlignment(Qt::AlignHCenter);
-    vbox->addWidget(logoLabel);
-
     QFont font;
     font.setBold(true);
     font.setPointSize(14);
@@ -40,18 +33,18 @@ menu_view::menu_view(const QSize & s, const QString& m, View * parent) : View(s,
     QString ml= this->getMail();
 
     // Connessione dei pulsanti ai segnali
-    connect(viewProfilo,SIGNAL(clicked(bool)),this,SLOT(p3()));
+    connect(viewProfilo,SIGNAL(clicked(bool)),this,SLOT(p1()));
     connect(viewMyPren,SIGNAL(clicked(bool)),this,SLOT(p2()));
-    connect(viewTuttePren,SIGNAL(clicked(bool)),this,SLOT(p1()));
+    connect(viewTuttePren,SIGNAL(clicked(bool)),this,SLOT(p3()));
 }
 void menu_view::p1() const{
-    emit View_tutte_signal(this->getMail());
+    emit View_profilo_signal(this->getMail());
 }
 void menu_view::p2() const{
     emit View_my_signal(this->getMail());
 }
 void  menu_view::p3() const{
-    emit View_my_signal(this->getMail());
+    emit View_tutte_signal(this->getMail());
 }
 void menu_view::closeEvent(QCloseEvent *event){
     if(QMessageBox::question(this,"Uscita","Vuoi uscire davvero?",QMessageBox::Yes|QMessageBox::No)==QMessageBox::Yes){

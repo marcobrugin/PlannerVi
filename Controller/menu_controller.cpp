@@ -4,7 +4,7 @@
 MenuController::MenuController(storage* s, menu_view * m, Controller* c) : Controller(s, m, c){
     view->setTitolo("MENU");
     connect(view,SIGNAL(View_profilo_signal(const QString&)),this,SLOT(Profilo_enter(const QString&)));
-    //connect(view,SIGNAL(View_my_signal()),this,SLOT(MyPren_enter()));
+    //connect(view,SIGNAL(View_my_signal(const QString&)),this,SLOT(MyPren_enter(const QString&)));
     connect(view,SIGNAL(View_tutte_signal(const QString&)),this,SLOT(Pren_enter(const QString&)));
 }
 
@@ -31,7 +31,7 @@ void MenuController::Profilo_enter(const QString& mail) const {
     pC->show();
     hide();
 }
-/*void MenuController::MyPren_enter() const {
+/*void MenuController::MyPren_enter(const QString& mail) const {
     myPren_view* newW =new myPren_view(QSize(300,400), view);
     newW->show();
     hide();

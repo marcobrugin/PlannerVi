@@ -15,7 +15,6 @@ class menu_view : public View {
     Q_OBJECT
 private:
     QVBoxLayout* vbox;
-    QLabel* logoLabel;
     QLabel* benvenuto;
     QHBoxLayout* HLayout;
     QPushButton* viewProfilo;
@@ -32,7 +31,7 @@ public:
     QString getMail() const;
 
 signals:
-    void View_profilo_signal(QString&) const;
+    void View_profilo_signal(const QString&) const;
     void View_my_signal(const QString&) const;
     void View_tutte_signal(const QString&) const;
 public slots:
