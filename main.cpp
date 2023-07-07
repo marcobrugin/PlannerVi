@@ -1,9 +1,9 @@
-#include<QApplication>
-#include<QMessageBox>
-#include<QDebug>
-#include<QObject>
+#include <QApplication>
+#include <QMessageBox>
+#include <QDebug>
+#include <QObject>
 #include <QIcon>
-#include"Model/storage.h"
+#include "Model/storage.h"
 #include "Controller/login_controller.h"
 #include "Controller/registrazione_controller.h"
 #include "Controller/admin_controller.h"
@@ -17,6 +17,15 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     a.setWindowIcon(QIcon("logo.ico"));
     storage* st=new storage();
+
+    QString filename=salvataggio_dati::JsonSelect();
+
+    QJsonDocument* document = salvataggio_dati::getFileJson(filename);
+    if (document->isNull()){
+        QMessageBox::warning(nullptr,"ERRORE","Errore File Json",QMessageBox::Yes);
+        QApplication::quit();
+        return 0;
+    }
 
     login_view* login = new login_view(QSize(500,300),nullptr);
     LoginController* log_controller= new LoginController (st, login);

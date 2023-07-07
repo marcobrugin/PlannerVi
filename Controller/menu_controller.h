@@ -6,7 +6,13 @@
 #include "Controller/profilo_controller.h"
 #include "Controller/mypren_controller.h"
 #include "Controller/prenotazioni_controller.h"
+#include "Controller/salvataggio_dati.h"
 #include "Model/storage.h"
+
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QFileDialog>
 
 class MenuController : public Controller {
     Q_OBJECT
@@ -23,6 +29,8 @@ public slots:
     void MyPren_enter(const QString&) const;
     void Pren_enter(const QString&) const;
     void onViewClosed() const override;
+
+    void salvataggio() const;
 };
 
 #endif // MENU_CONTROLLER_H

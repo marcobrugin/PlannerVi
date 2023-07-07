@@ -5,6 +5,7 @@
 #include<QJsonDocument>
 #include<QFileDialog>
 #include<QJsonObject>
+
 class salvataggio_dati {
 
 protected:
@@ -14,12 +15,9 @@ protected:
 
 public:
     virtual ~salvataggio_dati()=default;
-
-    static QString Json_File_Select();
-
+    static QString JsonSelect();
     static QJsonDocument* getFileJson(const QString&);
-
-    static bool Save_Model(const QJsonDocument&, const QString&);
+    static bool SalvaModel(const QJsonDocument&, const QString&);
 };
 
 #endif // SALVATAGGIO_DATI_H

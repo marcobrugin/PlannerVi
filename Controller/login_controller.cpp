@@ -2,6 +2,7 @@
 
 LoginController::LoginController(storage* s, login_view * l, Controller* c) : Controller(s, l, c){
     view->setTitolo("SCHEDA DI LOGIN");
+
     connect(view,SIGNAL(Login_signal(string, string)),this,SLOT(Login_enter(string, string)));
     connect(view,SIGNAL(Register_signal()),this,SLOT(Register_enter()));
 }
@@ -52,5 +53,3 @@ void LoginController::Register_enter() const {
     regC->show();
     hide();
 }
-
-

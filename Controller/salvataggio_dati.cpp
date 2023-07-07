@@ -1,6 +1,6 @@
 #include "salvataggio_dati.h"
 
-QString salvataggio_dati::Json_File_Select(){
+QString salvataggio_dati::JsonSelect(){
     QFileDialog window(nullptr);
     window.setFileMode(QFileDialog::ExistingFile);
     window.setNameFilter("JSON File (*.json)");
@@ -11,26 +11,26 @@ QString salvataggio_dati::Json_File_Select(){
 }
 
 QJsonDocument* salvataggio_dati::getFileJson(const QString& path){
-    QString data;
+    QString dati;
     QFile file;
     file.setFileName(path);
     file.open(QIODevice::ReadOnly | QIODevice::Text);
-    data = file.readAll();
+    dati = file.readAll();
     file.close();
-    //analizzo se il file può essere considerato valido e utilizzabile
-    QJsonDocument* doc = new QJsonDocument(QJsonDocument::fromJson(data.toLocal8Bit()));
-    QJsonObject dataObj = doc->object();
-    if(!dataObj.contains("data") && !dataObj.contains("autori") && !dataObj.contains("generi")){
-        delete doc;
+
+    QJsonDocument* document = new QJsonDocument(QJsonDocument::fromJson(dati.toLocal8Bit()));
+    QJsonObject datiObj = document->object();
+    if(!datiObj.contains("aule") && !datiObj.contains("prenotazioni") && !datiObj.contains("utenti")){
+        delete document;
         return new QJsonDocument();
     }
-    return doc;
+    return document;
 }
 
-bool salvataggio_dati::Save_Model(const QJsonDocument& doc,const QString& path){
+bool salvataggio_dati::SalvaModel(const QJsonDocument& document,const QString& path){
     QFile file(path);
     if(file.open(QFile::WriteOnly | QFile::Text | QFile::Truncate)){
-        file.write(doc.toJson());
+        file.write(document.toJson());
         file.close();
         return true;
     }

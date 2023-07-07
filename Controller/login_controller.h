@@ -9,6 +9,7 @@
 #include "View/menu_view.h"
 #include "View/registrazione_view.h"
 #include "View/admin_view.h"
+#include "Controller/salvataggio_dati.h"
 #include "Model/storage.h"
 
 class LoginController : public Controller {

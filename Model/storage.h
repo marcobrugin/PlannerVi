@@ -4,6 +4,9 @@
 #include<iostream>
 #include<vector>
 #include<string>
+#include<QJsonDocument>
+#include<QJsonObject>
+#include<QJsonArray>
 #include "contenitore.h"
 #include "aula.h"
 #include "prenotazione.h"
@@ -18,11 +21,11 @@ private:
     contenitore<aula*> aule;
     contenitore<prenotazione*> prenotazioni;
     vector<utente*> pers;
-protected:
-    //qui ci va il costruttore esplicito
+
 public:
     explicit storage();
-    storage(contenitore<aula*>& , contenitore<prenotazione*>& , vector<utente*>& );//costr
+    explicit storage(contenitore<aula*>& , contenitore<prenotazione*>& , vector<utente*>& );//costr
+    explicit storage(QJsonDocument*);
     virtual ~storage();//distr
 
     const contenitore<aula*>& getContAula() const;

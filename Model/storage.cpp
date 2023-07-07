@@ -6,6 +6,35 @@ storage::storage(){
     prenotazioni=contenitore<prenotazione*>();
 }
 
+storage::storage(QJsonDocument* document): aule(contenitore<aula*>()), prenotazioni(contenitore<prenotazione*>()){
+    QJsonObject JObject = document->object();
+    QJsonArray JArray_aule = JObject["aule"].toArray();
+    for (auto i: JArray_aule){
+        aula* a= new aula();
+    }
+
+    QJsonArray JArray_pren = JObject["prenotazioni"].toArray();
+    for (auto i: JArray_pren){
+        prenotazione* pren= new prenotazione(i.toObject().value("Persona").toString(),
+                                              i.toObject().value("Data").toString(), "dd-MM-yyyy",
+                                            i.toObject().value("OraArrivo").toString(),
+                                            i.toObject().value("OraUscita").toString(),
+                                            i.toObject().value("Causale").toString(),
+                                            i.toObject().value("Aula").toString());
+    }
+
+    QJsonArray JArray_ut = JObject["utenti"].toArray();
+    for (auto i: JArray_aule){
+        utente* ut= new utente(i.toObject().value("Persona").toString(),
+                                i.toObject().value("Data").toString(), "dd-MM-yyyy",
+                                i.toObject().value("OraArrivo").toString(),
+                                i.toObject().value("OraUscita").toString(),
+                                i.toObject().value("Causale").toString(),
+                                i.toObject().value("Aula").toString());
+    }
+
+}
+
 const contenitore<aula*>& storage::getContAula() const{
     return aule;
 }
