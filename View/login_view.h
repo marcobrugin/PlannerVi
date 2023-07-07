@@ -15,9 +15,7 @@ class login_view : public View {
     Q_OBJECT
 private:
     QVBoxLayout *layout;
-    QLabel *logoLabel;
-    QLabel *benvenutoLabel;
-
+    QLabel* logoLabel;
     QHBoxLayout *HLayout;
     QVBoxLayout *Vl1;
     QLabel *emailLabel;

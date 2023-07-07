@@ -12,6 +12,9 @@ RC_ICONS = logo_consvi.ico
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+RESOURCES = resources.qrc \
+    resources.qrc
+
 SOURCES += \
     Controller/admin_controller.cpp \
     Controller/controller.cpp \
@@ -32,6 +35,7 @@ SOURCES += \
     View/admin_view.cpp \
     View/login_view.cpp \
     View/menu_view.cpp \
+    View/mypren_view.cpp \
     View/prenotazioni_view.cpp \
     View/profilo_view.cpp \
     View/registrazione_view.cpp \
@@ -59,6 +63,7 @@ HEADERS += \
     View/admin_view.h \
     View/login_view.h \
     View/menu_view.h \
+    View/mypren_view.h \
     View/prenotazioni_view.h \
     View/profilo_view.h \
     View/registrazione_view.h \
@@ -70,6 +75,3 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES += \
-    logo_consvi.ico \
-    Images/logo_consvi.svg \

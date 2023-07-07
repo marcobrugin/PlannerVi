@@ -2,49 +2,75 @@
 
 profilo_view::profilo_view(const QSize& s, const utente* ut, View* parent) : View(s, parent), persona(ut)
 {
-    //view->setTitle="SCHEDA UTENTE"
-    hbox= new QHBoxLayout(this);
-    vbox1 = new QVBoxLayout(this);
-    vbox2 = new QVBoxLayout(this);
+    // Set window title
+    this->setTitolo("SCHEDA UTENTE");
 
+    // Create main layout
+    layout = new QGridLayout(this);
+
+    // Create labels
     QLabel* nome = new QLabel ("Nome", this);
     QLabel* cognome = new QLabel ("Cognome", this);
     QLabel* cod = new QLabel ("Codice Fiscale", this);
     QLabel* telefono = new QLabel ("Telefono", this);
     QLabel* email = new QLabel ("Email", this);
     QLabel* ruolo = new QLabel ("Ruolo", this);
-    vbox1->addWidget(nome);
-    vbox1->addWidget(cognome);
-    vbox1->addWidget(cod);
-    vbox1->addWidget(telefono);
-    vbox1->addWidget(email);
-    vbox1->addWidget(ruolo);
-    hbox->addLayout(vbox1);
 
+    // Create labels for user information
     QLabel* _nome = new QLabel (QString::fromStdString(ut->getNome()), this);
     QLabel* _cognome = new QLabel (QString::fromStdString(ut->getCognome()), this);
     QLabel* _cod = new QLabel (QString::fromStdString(ut->getCodiceFiscale()), this);
     QLabel* _telefono = new QLabel (QString::fromStdString(ut->getTelefono()), this);
     QLabel* _email = new QLabel (QString::fromStdString(ut->getEmail()), this);
     QLabel* _ruolo = new QLabel (QString::fromStdString(ut->getRuolo()), this);
-    indietro = new QPushButton ("Indietro", this);
-    vbox2->addWidget(_nome);
-    vbox2->addWidget(_cognome);
-    vbox2->addWidget(_cod);
-    vbox2->addWidget(_telefono);
-    vbox2->addWidget(_email);
-    vbox2->addWidget(_ruolo);
-    vbox2->addWidget(indietro);
-    hbox->addLayout(vbox2);
 
-    connect(indietro,SIGNAL(clicked(bool)),this,SIGNAL(indietro_signal()));
+    // Create "Indietro" button
+    indietro = new QPushButton("INDIETRO", this);
+
+    // Add labels and values to the layout
+    layout->addWidget(nome, 0, 0);
+    layout->addWidget(_nome, 0, 1);
+    layout->addWidget(cognome, 1, 0);
+    layout->addWidget(_cognome, 1, 1);
+    layout->addWidget(cod, 2, 0);
+    layout->addWidget(_cod, 2, 1);
+    layout->addWidget(telefono, 3, 0);
+    layout->addWidget(_telefono, 3, 1);
+    layout->addWidget(email, 4, 0);
+    layout->addWidget(_email, 4, 1);
+    layout->addWidget(ruolo, 5, 0);
+    layout->addWidget(_ruolo, 5, 1);
+
+    nome->setStyleSheet("background-color: #FFFFFF;");
+    _nome->setStyleSheet("background-color: #FFE6CC;");
+    cognome->setStyleSheet("background-color: #F0F0F0;");
+    _cognome->setStyleSheet("background-color: #FFE6CC;");
+    cod->setStyleSheet("background-color: #FFFFFF;");
+    _cod->setStyleSheet("background-color: #FFE6CC;");
+    telefono->setStyleSheet("background-color: #F0F0F0;");
+    _telefono->setStyleSheet("background-color: #FFE6CC;");
+    email->setStyleSheet("background-color: #FFFFFF;");
+    _email->setStyleSheet("background-color: #FFE6CC;");
+    ruolo->setStyleSheet("background-color: #F0F0F0;");
+    _ruolo->setStyleSheet("background-color: #FFE6CC;");
+
+    // Add "Indietro" button to the layout
+    layout->addWidget(indietro, 6, 0, 1, 2, Qt::AlignCenter);
+
+    // Set layout on the main widget
+    setLayout(layout);
+
+    // Connect "Indietro" button click signal
+     connect(indietro,SIGNAL(clicked(bool)),this,SIGNAL(indietro_signal()));
 }
 
-void profilo_view::closeEvent(QCloseEvent *event){
-    if(QMessageBox::question(this,"Uscita","Vuoi uscire davvero?",QMessageBox::Yes|QMessageBox::No)==QMessageBox::Yes){
+void profilo_view::closeEvent(QCloseEvent* event)
+{
+    if (QMessageBox::question(this, "Uscita", "Vuoi uscire davvero?", QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes) {
         event->accept();
         emit viewClosed();
     }
-    else
+    else {
         event->ignore();
+    }
 }

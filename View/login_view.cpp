@@ -6,22 +6,27 @@ login_view::login_view(const QSize& s, View* parent) : View(s, parent) {
     layout = new QVBoxLayout(this);
 
     // Aggiungi il logo
+    QPixmap logoPixmap(":/Images/consvi.svg");
     logoLabel = new QLabel(this);
-    logoLabel->setPixmap(QIcon(":/logo_consvi.ico").pixmap(256));
+    logoLabel->setPixmap(logoPixmap.scaledToHeight(150));
     logoLabel->setAlignment(Qt::AlignHCenter);
     layout->addWidget(logoLabel);
 
-    QPixmap logoPixmap("logo_consvi.ico");
-    logoLabel = new QLabel(this);
-    logoLabel->setPixmap(logoPixmap.scaledToHeight(256));
-    logoLabel->setAlignment(Qt::AlignHCenter);
-    layout->addWidget(logoLabel);
+    QFont font1;
+    font1.setBold(true);
+    font1.setPointSize(14);
+    QFont font2;
+    font2.setItalic(true);
+    font2.setPointSize(11);
 
-
-    benvenutoLabel = new QLabel(this);
-    benvenutoLabel->setText("Benvenuto!");
-    benvenutoLabel->setAlignment(Qt::AlignCenter);
-    layout->addWidget(benvenutoLabel);
+    QLabel* t1= new QLabel("PlannerVi",this);
+    t1->setAlignment(Qt::AlignCenter);
+    t1->setFont(font1);
+    QLabel* t2= new QLabel("Software di prenotazione delle aule del Conservatorio di Vicenza",this);
+    t2->setAlignment(Qt::AlignCenter);
+    t2->setFont(font2);
+    layout->addWidget(t1);
+    layout->addWidget(t2);
 
     HLayout = new QHBoxLayout(this);
     layout->addLayout(HLayout);

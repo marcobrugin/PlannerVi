@@ -4,17 +4,14 @@
 #include "view.h"
 #include "Model/utente.h"
 #include <QObject>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
+#include <QGridLayout>
 #include <QLabel>
 #include <QPushButton>
 
 class profilo_view : public View {
     Q_OBJECT
 private:
-    QHBoxLayout* hbox;
-    QVBoxLayout* vbox1;
-    QVBoxLayout* vbox2;
+    QGridLayout* layout;
     QPushButton* indietro;
     const utente* persona;
 protected:

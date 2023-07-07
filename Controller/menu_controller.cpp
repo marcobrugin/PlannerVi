@@ -19,7 +19,6 @@ menu_view* MenuController::getView() const {
 
 void MenuController::Profilo_enter(const QString& mail) const {
     //estrapolare dalla mail l'utente
-    qDebug()<<"prova profilo";
     utente* persona=nullptr;
     for(auto i: getModel()->getUtente()){
         if(i->getEmail()==(mail).toStdString()){
@@ -39,8 +38,8 @@ void MenuController::Profilo_enter(const QString& mail) const {
 */
 void MenuController::Pren_enter(const QString& mail) const {
     prenotazioni_view* prW =new prenotazioni_view(QSize(300,400), mail, view);
-    PrenController* pC= new PrenController(getModel(), prW, const_cast<MenuController*>(this));
-    pC->show();
+    PrenController* prC= new PrenController(getModel(), prW, const_cast<MenuController*>(this));
+    prC->show();
     hide();
 }
 
