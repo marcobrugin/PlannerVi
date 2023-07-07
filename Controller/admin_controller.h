@@ -2,7 +2,6 @@
 #define ADMIN_CONTROLLER_H
 
 #include "controller.h"
-
 #include "View/admin_view.h"
 #include "Model/storage.h"
 

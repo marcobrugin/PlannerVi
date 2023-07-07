@@ -20,6 +20,7 @@ SOURCES += \
     Controller/controller.cpp \
     Controller/login_controller.cpp \
     Controller/menu_controller.cpp \
+    Controller/mypren_controller.cpp \
     Controller/prenotazioni_controller.cpp \
     Controller/profilo_controller.cpp \
     Controller/registrazione_controller.cpp \
@@ -47,6 +48,7 @@ HEADERS += \
     Controller/controller.h \
     Controller/login_controller.h \
     Controller/menu_controller.h \
+    Controller/mypren_controller.h \
     Controller/prenotazioni_controller.h \
     Controller/profilo_controller.h \
     Controller/registrazione_controller.h \

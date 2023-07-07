@@ -4,7 +4,7 @@
 MenuController::MenuController(storage* s, menu_view * m, Controller* c) : Controller(s, m, c){
     view->setTitolo("MENU");
     connect(view,SIGNAL(View_profilo_signal(const QString&)),this,SLOT(Profilo_enter(const QString&)));
-    //connect(view,SIGNAL(View_my_signal(const QString&)),this,SLOT(MyPren_enter(const QString&)));
+    connect(view,SIGNAL(View_my_signal(const QString&)),this,SLOT(MyPren_enter(const QString&)));
     connect(view,SIGNAL(View_tutte_signal(const QString&)),this,SLOT(Pren_enter(const QString&)));
 }
 
@@ -25,17 +25,19 @@ void MenuController::Profilo_enter(const QString& mail) const {
             persona=i;
         }
     }
-    profilo_view* newW =new profilo_view(QSize(300,400), persona, view);
-    ProfiloController* pC= new ProfiloController(getModel(), newW, const_cast<MenuController*>(this));
+    profilo_view* newW = new profilo_view(QSize(300,400), persona, view);
+    ProfiloController* pC = new ProfiloController(getModel(), newW, const_cast<MenuController*>(this));
     pC->show();
     hide();
 }
-/*void MenuController::MyPren_enter(const QString& mail) const {
-    myPren_view* newW =new myPren_view(QSize(300,400), view);
-    newW->show();
+
+void MenuController::MyPren_enter(const QString& mail) const {
+    myPren_view* myW = new myPren_view(QSize(300,400), mail, view);
+    MyPrenController* myC = new MyPrenController (getModel(), myW, const_cast<MenuController*>(this));
+    myC->show();
     hide();
 }
-*/
+
 void MenuController::Pren_enter(const QString& mail) const {
     prenotazioni_view* prW =new prenotazioni_view(QSize(300,400), mail, view);
     PrenController* prC= new PrenController(getModel(), prW, const_cast<MenuController*>(this));
