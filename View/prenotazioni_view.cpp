@@ -33,9 +33,9 @@ void prenotazioni_view::carica_pren(const contenitore<prenotazione*>& pren){
         pren_table->setCellWidget(i, 0, aulaLabel);
         QLabel* dataLabel = new QLabel(j->getData().toString("dd-MM-yyyy"), this);
         pren_table->setCellWidget(i, 1, dataLabel);
-        QLabel* oraArrivoLabel = new QLabel(j->getOraArrivo().toString("hh-mm"), this);
+        QLabel* oraArrivoLabel = new QLabel(j->getOraArrivo().toString("hh:mm"), this);
         pren_table->setCellWidget(i, 2, oraArrivoLabel);
-        QLabel* oraUscitaLabel = new QLabel(j->getOraUscita().toString("hh-mm"), this);
+        QLabel* oraUscitaLabel = new QLabel(j->getOraUscita().toString("hh:mm"), this);
         pren_table->setCellWidget(i, 3, oraUscitaLabel);
         QLabel* causaleLabel = new QLabel(QString::fromStdString(j->getCausale()), this);
         pren_table->setCellWidget(i, 4, causaleLabel);
@@ -76,6 +76,7 @@ void prenotazioni_view::carica_pren(const contenitore<prenotazione*>& pren){
 
     aggiungi = new QPushButton ("+", this);
     pren_table->setCellWidget(i,6,aggiungi);
+    pren_table->resizeColumnsToContents();
 
     // Connessione del pulsante di login allo slot onLoginButtonClicked()
     connect(aggiungi, SIGNAL(clicked()), this, SIGNAL (ButtonClicked()));
