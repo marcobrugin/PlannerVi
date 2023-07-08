@@ -29,9 +29,9 @@ void admin_view::visualizza_prenotazioni(const contenitore<prenotazione*>& pren)
         QLabel* aulaLabel = new QLabel(QString::number(j->getAula()), this);         pren_table->setCellWidget(i, 0, aulaLabel);
         QLabel* dataLabel = new QLabel((j->getData()).toString("dd-MM-yyyy"), this);
         pren_table->setCellWidget(i, 1, dataLabel);
-        QLabel* oraArrivoLabel = new QLabel(j->getOraArrivo().toString("hh-mm"), this);
+        QLabel* oraArrivoLabel = new QLabel(j->getOraArrivo().toString("hh:mm"), this);
         pren_table->setCellWidget(i, 2, oraArrivoLabel);
-        QLabel* oraUscitaLabel = new QLabel(j->getOraUscita().toString("hh-mm"), this);
+        QLabel* oraUscitaLabel = new QLabel(j->getOraUscita().toString("hh:mm"), this);
         pren_table->setCellWidget(i, 3, oraUscitaLabel);
         QLabel* causaleLabel = new QLabel(QString::fromStdString(j->getCausale()), this);
         pren_table->setCellWidget(i, 4, causaleLabel);
@@ -81,6 +81,7 @@ void admin_view::visualizza_prenotazioni(const contenitore<prenotazione*>& pren)
 
     aggiungi = new QPushButton ("+", this);
     pren_table->setCellWidget(i,7,aggiungi);
+    pren_table->resizeColumnsToContents();
 
     // Connessione del pulsante di aggiunta allo slot aggiungi_pren()
     connect(aggiungi, SIGNAL(clicked()), this, SIGNAL (ButtonClicked()));
@@ -97,7 +98,7 @@ void admin_view::aggiungi_pren(){
     QString mail= _mail->toPlainText();
 
     //controllo errori basilari
-    if(aula!=NULL || data.isNull() || oraArrivo.isNull() || oraUscita.isNull() || causale.isEmpty() || causale.isNull()){
+    if(aula==NULL || data.isNull() || oraArrivo.isNull() || oraUscita.isNull() || causale.isEmpty() || causale.isNull()){
         static_cast<View*>(this)->showError("Inserimento non valido", "I valori inseriti non sono accettati");
     }
     else{
@@ -109,8 +110,8 @@ void admin_view::addToView(prenotazione* pr){
     pren_table->insertRow(pren_table->rowCount()-1);
     pren_table->setCellWidget(pren_table->rowCount()-2,0,new QLabel(QString::number(pr->getAula()),this));
     pren_table->setCellWidget(pren_table->rowCount()-2,1,new QLabel(pr->getData().toString("dd-MM-yyyy"),this));
-    pren_table->setCellWidget(pren_table->rowCount()-2,2,new QLabel(pr->getOraArrivo().toString("hh-mm"),this));
-    pren_table->setCellWidget(pren_table->rowCount()-2,3,new QLabel(pr->getOraUscita().toString("hh-mm"),this));
+    pren_table->setCellWidget(pren_table->rowCount()-2,2,new QLabel(pr->getOraArrivo().toString("hh:mm"),this));
+    pren_table->setCellWidget(pren_table->rowCount()-2,3,new QLabel(pr->getOraUscita().toString("hh:mm"),this));
     pren_table->setCellWidget(pren_table->rowCount()-2,4,new QLabel(QString::fromStdString(pr->getCausale()),this));
     pren_table->setCellWidget(pren_table->rowCount()-2,5,new QLabel(QString::fromStdString(pr->getPersona()),this));
     QPushButton* remove=new QPushButton("-",this);

@@ -1,7 +1,7 @@
 {
     "prenotazioni": [
         {
-            "Persona": "user1@consvi.it",
+            "Persona": "anna.bach@consvi.it",
             "Data": "10/07/2023",
             "OraArrivo": "11:30",
             "OraUscita": "12:30",
@@ -9,7 +9,7 @@
             "Aula": 113
         },
         {
-            "Persona": "user2@consvi.it",
+            "Persona": "mario.rossi@consvi.it",
             "Data": "10/07/2023",
             "OraArrivo": "11:30",
             "OraUscita": "12:30",
@@ -17,7 +17,7 @@
             "Aula": 4 
         },
         {
-            "Persona": "user3@consvi.it",
+            "Persona": "maria.bianchi@consvi.it",
             "Data": "10/07/2023",
             "OraArrivo": "11:30",
             "OraUscita": "12:30",

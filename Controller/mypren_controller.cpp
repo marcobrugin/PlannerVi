@@ -37,7 +37,7 @@ void MyPrenController::aggiungi_enter(const int& _aula, const QDate& data, const
         ut=i->getPersona();
         au=i->getAula();
     }
-    prenotazione* nuova = new prenotazione(ut,data,oraArrivo,oraUscita,causale.toStdString(),au);
+    prenotazione* nuova = new prenotazione(ut,data,oraArrivo,oraUscita,causale.toStdString(),_aula);
     getModel()->addPrenotazione(nuova);
     getView()->addToView(nuova);
 }

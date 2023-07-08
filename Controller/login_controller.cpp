@@ -25,7 +25,7 @@ void LoginController::Login_enter(const string& em, const string& pass) const {
             if(it->getPassword()==pass){ //controllo correttezza password
                 //CONTROLLO SUL UTENTE VS ADMIN PER LA VISUALIZZAZIONE DELLA RELATIVA SCHEDA
                 if(it->getEmail()=="admin"){
-                    admin_view* aW = new admin_view(QSize(300,400), view);
+                    admin_view* aW = new admin_view(QSize(900,400), view);
                     AdminController* aC = new AdminController(getModel() , aW , const_cast<LoginController*>(this));
                     aC->show();
                     hide();

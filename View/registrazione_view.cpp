@@ -107,6 +107,10 @@ void registrazione_view::onRegisterButtonClicked()
         return;
     }
     else{
+        if (!email.endsWith("@consvi.it")) {
+            this->showError("Email non valida", "Utilizzare l'email istituzionale @consvi.it");
+            return;
+        }
         bool hasUppercase = false;
         bool hasNumber = false;
         int length = password.length();

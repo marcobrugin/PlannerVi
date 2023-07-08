@@ -32,14 +32,14 @@ void MenuController::Profilo_enter(const QString& mail) const {
 }
 
 void MenuController::MyPren_enter(const QString& mail) const {
-    myPren_view* myW = new myPren_view(QSize(600,400), mail, view);
+    myPren_view* myW = new myPren_view(QSize(900,400), mail, view);
     MyPrenController* myC = new MyPrenController (getModel(), myW, const_cast<MenuController*>(this));
     myC->show();
     hide();
 }
 
 void MenuController::Pren_enter(const QString& mail) const {
-    prenotazioni_view* prW =new prenotazioni_view(QSize(600,400), mail, view);
+    prenotazioni_view* prW =new prenotazioni_view(QSize(900,400), mail, view);
     PrenController* prC= new PrenController(getModel(), prW, const_cast<MenuController*>(this));
     prC->show();
     hide();

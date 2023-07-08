@@ -20,8 +20,8 @@ storage::storage(QJsonDocument* document): aule(contenitore<aula*>()), prenotazi
 
         prenotazione* pren= new prenotazione(i.toObject().value("Persona").toString().toStdString(),
                                             QDate::fromString(i.toObject().value("Data").toString(),"dd/MM/yyyy"),
-                                            QTime::fromString(i.toObject().value("OraArrivo").toString(),"hh-mm"),
-                                            QTime::fromString(i.toObject().value("OraUscita").toString(),"hh-mm"),
+                                            QTime::fromString(i.toObject().value("OraArrivo").toString(),"hh:mm"),
+                                            QTime::fromString(i.toObject().value("OraUscita").toString(),"hh:mm"),
                                             i.toObject().value("Causale").toString().toStdString(),
                                             i.toObject().value("Aula").toInt());
         prenotazioni.push(pren);

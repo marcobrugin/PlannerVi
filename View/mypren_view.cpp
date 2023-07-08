@@ -6,7 +6,11 @@ QString myPren_view::getMail() const { return mail; }
 myPren_view::myPren_view(const QSize& s, const QString& m, View* parent) : View(s, parent), mail(m), pren_table(new QTableWidget(this)) {
     vbox=new QVBoxLayout(this);
     hbox=new QHBoxLayout(this);
+    QFont font;
+    font.setBold(true);
+    font.setPointSize(14);
     QLabel* titolo=new QLabel("VISUALIZZAZIONE LE MIE PRENOTAZIONI ", this);
+    titolo->setFont(font);
     hbox->addWidget(titolo);
     hbox->addStretch();
     indietro = new QPushButton("Torna al menu", this);
@@ -14,10 +18,11 @@ myPren_view::myPren_view(const QSize& s, const QString& m, View* parent) : View(
 
     vbox->addLayout(hbox);
     connect(indietro,SIGNAL(clicked(bool)),this,SIGNAL(indietro_signal()));
+    setLayout(vbox);
 }
 
 void myPren_view::create_table(const QStringList& intestazioni){
-    pren_table->setColumnCount(7);
+    pren_table->setColumnCount(8);
     pren_table->setHorizontalHeaderLabels(intestazioni);
     pren_table->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     pren_table->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -29,14 +34,15 @@ void myPren_view::carica_pren(const contenitore<prenotazione*>& pren){
     int i=0;
     QString my=this->getMail();
     for(auto j: pren){
-        if(QString::fromStdString(j->getPersona()) == my){
+        if(QString::fromStdString(j->getPersona()).compare(my) == 0){
             pren_table->insertRow(i);
-            QLabel* aulaLabel = new QLabel(QString::number(j->getAula()), this);         pren_table->setCellWidget(i, 0, aulaLabel);
+            QLabel* aulaLabel = new QLabel(QString::number(j->getAula()), this);
+            pren_table->setCellWidget(i, 0, aulaLabel);
             QLabel* dataLabel = new QLabel((j->getData()).toString("dd-MM-yyyy"), this);
             pren_table->setCellWidget(i, 1, dataLabel);
-            QLabel* oraArrivoLabel = new QLabel(j->getOraArrivo().toString("hh-mm"), this);
+            QLabel* oraArrivoLabel = new QLabel(j->getOraArrivo().toString("hh:mm"), this);
             pren_table->setCellWidget(i, 2, oraArrivoLabel);
-            QLabel* oraUscitaLabel = new QLabel(j->getOraUscita().toString("hh-mm"), this);
+            QLabel* oraUscitaLabel = new QLabel(j->getOraUscita().toString("hh:mm"), this);
             pren_table->setCellWidget(i, 3, oraUscitaLabel);
             QLabel* causaleLabel = new QLabel(QString::fromStdString(j->getCausale()), this);
             pren_table->setCellWidget(i, 4, causaleLabel);
@@ -81,13 +87,32 @@ void myPren_view::carica_pren(const contenitore<prenotazione*>& pren){
     pren_table->setCellWidget(i,4,_causale);
     _mail = new QLabel(this->getMail(), this);
     pren_table->setCellWidget(i,5,_mail);
-
+    QLabel* rimuovi = new QLabel(" non rimovibile",this);
+    pren_table->setCellWidget(i, 6, rimuovi);
     aggiungi = new QPushButton ("+", this);
-    pren_table->setCellWidget(i,6,aggiungi);
+    pren_table->setCellWidget(i,7,aggiungi);
+    pren_table->resizeColumnsToContents();
 
     // Connessione del pulsante di login allo slot onLoginButtonClicked()
     connect(aggiungi, SIGNAL(clicked()), this, SIGNAL (ButtonClicked()));
     connect(this,SIGNAL(ButtonClicked()),this,SLOT(aggiungi_pren()));
+}
+
+void myPren_view::aggiungi_pren(){
+    int aula = (_aula->text()).toInt();
+    QDate data = _data->date();
+    QTime oraArrivo= _oraArrivo->time();
+    QTime oraUscita= _oraArrivo->time();
+    QString causale= _causale->toPlainText();
+    QString mail= _mail->text();
+
+    //controllo errori basilari
+    if(aula==NULL || data.isNull() || oraArrivo.isNull() || oraUscita.isNull() || causale.isEmpty() || causale.isNull()){
+        static_cast<View*>(this)->showError("Inserimento non valido", "I valori inseriti non sono accettati");
+    }
+    else{
+        emit aggiungi_signal(aula, data, oraArrivo, oraUscita, causale, mail);
+    }
 }
 
 void myPren_view::addToView(prenotazione* pr){
@@ -104,23 +129,6 @@ void myPren_view::addToView(prenotazione* pr){
         unsigned int riga = pren_table->indexAt(remove->pos()).row();
         emit rimuovi_signal(riga);
     });
-}
-
-void myPren_view::aggiungi_pren(){
-    int aula = (_aula->text()).toInt();
-    QDate data = _data->date();
-    QTime oraArrivo= _oraArrivo->time();
-    QTime oraUscita= _oraArrivo->time();
-    QString causale= _causale->toPlainText();
-    QString mail= _mail->text();
-
-    //controllo errori basilari
-    if(aula!=NULL || data.isNull() || oraArrivo.isNull() || oraUscita.isNull() || causale.isEmpty() || causale.isNull()){
-        static_cast<View*>(this)->showError("Inserimento non valido", "I valori inseriti non sono accettati");
-    }
-    else{
-        emit aggiungi_signal(aula, data, oraArrivo, oraUscita, causale, mail);
-    }
 }
 
 void myPren_view::rimuovi_prenotazione(uint i){
