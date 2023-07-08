@@ -71,7 +71,6 @@ HEADERS += \
     View/registrazione_view.h \
     View/view.h
 
-
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

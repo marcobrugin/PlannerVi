@@ -21,10 +21,10 @@ admin_view* AdminController::getView() const{
 void AdminController::aggiungi_enter(const int& _aula, const QDate& data, const QTime& oraArrivo, const QTime& oraUscita, const QString& causale, const QString& mail) const {
     string _causale=causale.toStdString();
     string _mail=mail.toStdString();
-    utente* ut;
-    aula* au;
+    string ut;
+    int au;
     for(auto i : getModel()->getContPren()){
-        if(i->getAula()->getNumero() == _aula && i->getData()==data ){
+        if(i->getAula() == _aula && i->getData()==data ){
             QTime arrivo= i->getOraArrivo();
             QTime uscita= i->getOraUscita();
             if((oraArrivo>=arrivo && oraArrivo<uscita) || (oraUscita>arrivo && oraUscita<=uscita) || (oraArrivo<= arrivo && oraUscita>=uscita)){

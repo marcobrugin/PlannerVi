@@ -4,6 +4,7 @@
 #include<iostream>
 #include<vector>
 #include<string>
+#include<QString>
 #include<QJsonDocument>
 #include<QJsonObject>
 #include<QJsonArray>

@@ -29,9 +29,9 @@ void myPren_view::carica_pren(const contenitore<prenotazione*>& pren){
     int i=0;
     QString my=this->getMail();
     for(auto j: pren){
-        if(QString::fromStdString(j->getPersona()->getEmail()) == my){
+        if(QString::fromStdString(j->getPersona()) == my){
             pren_table->insertRow(i);
-            QLabel* aulaLabel = new QLabel(QString::number(j->getAula()->getNumero()), this);         pren_table->setCellWidget(i, 0, aulaLabel);
+            QLabel* aulaLabel = new QLabel(QString::number(j->getAula()), this);         pren_table->setCellWidget(i, 0, aulaLabel);
             QLabel* dataLabel = new QLabel((j->getData()).toString("dd-MM-yyyy"), this);
             pren_table->setCellWidget(i, 1, dataLabel);
             QLabel* oraArrivoLabel = new QLabel(j->getOraArrivo().toString("hh-mm"), this);
@@ -40,7 +40,7 @@ void myPren_view::carica_pren(const contenitore<prenotazione*>& pren){
             pren_table->setCellWidget(i, 3, oraUscitaLabel);
             QLabel* causaleLabel = new QLabel(QString::fromStdString(j->getCausale()), this);
             pren_table->setCellWidget(i, 4, causaleLabel);
-            QLabel* emailLabel = new QLabel(QString::fromStdString(j->getPersona()->getEmail()), this);
+            QLabel* emailLabel = new QLabel(QString::fromStdString(j->getPersona()), this);
             pren_table->setCellWidget(i, 5, emailLabel);
 
             QPushButton* rimuovi = new QPushButton("-",this);
@@ -92,12 +92,12 @@ void myPren_view::carica_pren(const contenitore<prenotazione*>& pren){
 
 void myPren_view::addToView(prenotazione* pr){
     pren_table->insertRow(pren_table->rowCount()-1);
-    pren_table->setCellWidget(pren_table->rowCount()-2,0,new QLabel(QString::number(pr->getAula()->getNumero()),this));
+    pren_table->setCellWidget(pren_table->rowCount()-2,0,new QLabel(QString::number(pr->getAula()),this));
     pren_table->setCellWidget(pren_table->rowCount()-2,1,new QLabel(pr->getData().toString("dd-MM-yyyy"),this));
     pren_table->setCellWidget(pren_table->rowCount()-2,2,new QLabel(pr->getOraArrivo().toString("hh-mm"),this));
     pren_table->setCellWidget(pren_table->rowCount()-2,3,new QLabel(pr->getOraUscita().toString("hh-mm"),this));
     pren_table->setCellWidget(pren_table->rowCount()-2,4,new QLabel(QString::fromStdString(pr->getCausale()),this));
-    pren_table->setCellWidget(pren_table->rowCount()-2,5,new QLabel(QString::fromStdString(pr->getPersona()->getEmail()),this));
+    pren_table->setCellWidget(pren_table->rowCount()-2,5,new QLabel(QString::fromStdString(pr->getPersona()),this));
     QPushButton* remove=new QPushButton("-",this);
     pren_table->setCellWidget(pren_table->rowCount()-2,7,remove);
     connect(remove, &QPushButton::clicked,[this,remove](){

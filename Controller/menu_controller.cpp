@@ -69,12 +69,12 @@ void MenuController::salvataggio() const {
     }
     for(auto i: getModel()->getContPren()){
         QJsonObject record1;
-        record1.insert(QString::fromStdString("Persona"),QString::fromStdString(i->getPersona()->getEmail()));
+        record1.insert(QString::fromStdString("Persona"),QString::fromStdString(i->getPersona()));
         record1.insert(QString::fromStdString("Data"),i->getData().toString());
         record1.insert(QString::fromStdString("OraArrivo"),i->getOraArrivo().toString());
         record1.insert(QString::fromStdString("OraUscita"),i->getOraUscita().toString());
         record1.insert(QString::fromStdString("Causale"),QString::fromStdString(i->getCausale()));
-        record1.insert(QString::fromStdString("Aula"),i->getAula()->getNumero());
+        record1.insert(QString::fromStdString("Aula"),i->getAula());
         archivio_pren.push_back(record1);
     }
     for(auto i: getModel()->getUtente()){
