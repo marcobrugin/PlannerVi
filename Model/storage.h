@@ -14,6 +14,7 @@
 #include "utente.h"
 #include "model.h"
 
+using std::string;
 using std::vector;
 
 

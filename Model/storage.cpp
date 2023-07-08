@@ -7,34 +7,37 @@ storage::storage(){
 }
 
 storage::storage(QJsonDocument* document): aule(contenitore<aula*>()), prenotazioni(contenitore<prenotazione*>()){
-    /* QJsonObject JObject = document->object();
-    QJsonArray JArray_aule = JObject["aule"].toArray();
+    QJsonObject JObject = document->object();
+
+    /*QJsonArray JArray_aule = JObject["aule"].toArray();
     for (auto i: JArray_aule){
         aula* a= new aula();
     }
+*/
 
     QJsonArray JArray_pren = JObject["prenotazioni"].toArray();
     for (auto i: JArray_pren){
-        prenotazione* pren= new prenotazione(i.toObject().value("Persona"),
-                                            i.toObject().value("Data").toString(),
-                                            i.toObject().value("OraArrivo").toString(),
-                                            i.toObject().value("OraUscita").toString(),
-                                            i.toObject().value("Causale"),
-                                            i.toObject().value("Aula").toString());
+
+        prenotazione* pren= new prenotazione(i.toObject().value("Persona").toString().toStdString(),
+                                            QDate::fromString(i.toObject().value("Data").toString(),"dd/MM/yyyy"),
+                                            QTime::fromString(i.toObject().value("OraArrivo").toString(),"hh-mm"),
+                                            QTime::fromString(i.toObject().value("OraUscita").toString(),"hh-mm"),
+                                            i.toObject().value("Causale").toString().toStdString(),
+                                            i.toObject().value("Aula").toInt());
+        prenotazioni.push(pren);
     }
 
     QJsonArray JArray_ut = JObject["utenti"].toArray();
-    for (auto i: JArray_aule){
-        utente* ut= new utente(i.toObject().value("Nome"),
-                                i.toObject().value("Cognome"),
-                                i.toObject().value("CodFiscale"),
-                                i.toObject().value("Telefono"),
-                                i.toObject().value("Email"),
-                                i.toObject().value("Ruolo"),
-                                i.toObject().value("Password"));
+    for (auto i: JArray_ut){
+        utente* ut= new utente(i.toObject().value("Nome").toString().toStdString(),
+                                i.toObject().value("Cognome").toString().toStdString(),
+                                i.toObject().value("CodFiscale").toString().toStdString(),
+                                i.toObject().value("Telefono").toString().toStdString(),
+                                i.toObject().value("Email").toString().toStdString(),
+                                i.toObject().value("Ruolo").toString().toStdString(),
+                                i.toObject().value("Password").toString().toStdString());
+        pers.push_back(ut);
     }
-*/
-
 }
 
 const contenitore<aula*>& storage::getContAula() const{

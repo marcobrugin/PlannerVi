@@ -20,7 +20,7 @@ QJsonDocument* salvataggio_dati::getFileJson(const QString& path){
 
     QJsonDocument* document = new QJsonDocument(QJsonDocument::fromJson(dati.toLocal8Bit()));
     QJsonObject datiObj = document->object();
-    if(!datiObj.contains("aule") && !datiObj.contains("prenotazioni") && !datiObj.contains("utenti")){
+    if(!datiObj.contains("prenotazioni") && !datiObj.contains("utenti")){
         delete document;
         return new QJsonDocument();
     }

@@ -1,1 +1,57 @@
- 
+{
+    "prenotazioni": [
+        {
+            "Persona": "user1@consvi.it",
+            "Data": "10/07/2023",
+            "OraArrivo": "11:30"
+            "OraUscita": "12:30",
+            "Causale": "Lezione di prassi",
+            "Aula": 113,
+        },
+        {
+            "Persona": "user2@consvi.it",
+            "Data": "10/07/2023",
+            "OraArrivo": "11:30"
+            "OraUscita": "12:30",
+            "Causale": "Studio al clavicembalo",
+            "Aula": 004,
+        },
+        {
+            "Persona": "user3@consvi.it",
+            "Data": "10/07/2023",
+            "OraArrivo": "11:30"
+            "OraUscita": "12:30",
+            "Causale": "Tecniche di improvvisazione",
+            "Aula": 103,
+        }
+    ],
+    "utenti": [
+        {
+            "Nome": "Admin",
+            "Cognome": "Admin",
+            "CodFiscale": ""
+            "Telefono": "",
+            "Email": "admin",
+            "Ruolo": "Docente",
+	    "Password": "PlannerVi2023",
+        },
+        {
+            "Nome": "Mario",
+            "Cognome": "Rossi",
+            "CodFiscale": "RSMMRO02D17L840Z"
+            "Telefono": "123456",
+            "Email": "mario.rossi@consvi.it",
+            "Ruolo": "Studente",
+	    "Password": "Mario2002",
+        },
+        {
+            "Nome": "Anna",
+            "Cognome": "Bach",
+            "CodFiscale": "BCHNNA81M72L840X"
+            "Telefono": "654321",
+            "Email": "anna.bach@consvi.it",
+            "Ruolo": "Docente",
+	    "Password": "Anna1981",
+        }
+    ]
+}

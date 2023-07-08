@@ -50,16 +50,16 @@ void MenuController::onViewClosed() const {
 }
 
 void MenuController::salvataggio() const {
-    if(!getModel()->getContAula().size() && !getModel()->getContPren().size() && !getModel()->getUtente().size()){
+    if(!getModel()->getContPren().size() && !getModel()->getUtente().size()){
         view->showError("Errore", "Model vuoto");
     }
     QJsonDocument* document = new QJsonDocument();
     QJsonObject cartella;
-    QJsonArray archivio_aule;
+    //QJsonArray archivio_aule;
     QJsonArray archivio_pren;
     QJsonArray archivio_ut;
 
-    for(auto i: getModel()->getContAula()){
+    /*for(auto i: getModel()->getContAula()){
         QJsonObject record;
         record.insert(QString::fromStdString("Piano"),i->getPiano());
         record.insert(QString::fromStdString("Numero"),i->getNumero());
@@ -67,6 +67,7 @@ void MenuController::salvataggio() const {
         record.insert(QString::fromStdString("MaxPersone"),i->getMaxPersone());
         archivio_aule.push_back(record);
     }
+*/
     for(auto i: getModel()->getContPren()){
         QJsonObject record1;
         record1.insert(QString::fromStdString("Persona"),QString::fromStdString(i->getPersona()));
@@ -87,7 +88,7 @@ void MenuController::salvataggio() const {
         record2.insert(QString::fromStdString("Password"),QString::fromStdString(i->getPassword()));
         archivio_ut.push_back(record2);
     }
-    cartella.insert(QString::fromStdString("aule"),archivio_aule);
+    //cartella.insert(QString::fromStdString("aule"),archivio_aule);
     cartella.insert(QString::fromStdString("prenotazioni"),archivio_pren);
     cartella.insert(QString::fromStdString("utenti"),archivio_ut);
 
